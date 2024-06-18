@@ -1,4 +1,4 @@
-﻿body { font-family: 'Cormorant Garamond', 'Gowun Batang', 'Tiro Devanagari Sanskrit', 'Charis SIL';, serif; font-size: 24px; padding: 0px; margin: 0px; background-color: #F5DEAD; color: #27173D; overflow-x: hidden; }
+body { font-family: 'Cormorant Garamond', 'Gowun Batang', 'Tiro Devanagari Sanskrit', 'Charis SIL';, serif; font-size: 24px; padding: 0px; margin: 0px; background-color: #F5DEAD; color: #27173D; overflow-x: hidden; }
 
 a { text-decoration: none; color: #d17d43; }
 
@@ -37,8 +37,10 @@ div#topbar { xtext-shadow: #9C3B00 1px 1px 0px; padding: 2px 0px; background-col
 div#topbar > div.inside { width: 770px; margin: 0px auto; padding: 7px 0px;  }
 div#topbar a { font-weight: bold; color: #27173D; }
 div#topbar div.clear { clear: both; }
-@media (max-width: 770px) {
+div#topbar a.logo_image { cursor: pointer; display: inline; }
+@media (max-width: 600px) {
 	div#topbar > div.inside { width: auto; margin: auto 10px; }
+  div#topbar a.logo_image { margin-right: -50px; }
 }
 
 div.topcontrol { display: inline; margin-left: 12px; float: right; }
@@ -52,7 +54,10 @@ div.dropdown span.title { padding: 3px 10px; border-radius: 2px 2px 0px 0px; dis
 div.dropdown:hover span.title { background-color: #F5DEAD; box-shadow: 2px 2px 2px #9C3B00;}
 div.dropdown div.submenu { display: none; position: absolute; right: 0px; top: 1.5em; margin-top: 2px; white-space: nowrap; background-color: #F5DEAD; padding: 15px 20px 15px 10px; box-shadow: 2px 2px 2px #9C3B00; border-radius: 2px 0px 2px 2px; min-width: 100px; z-index: 20; }
 div.dropdown:hover div.submenu { display: block; }
-div.dropdown div.submenu a { font-weight: normal; display: block; padding: 5px 10px; }
+div.dropdown div.submenu a { font-weight: normal; display: block; padding: 5px 10px; text-align: right; }
+@media (max-width: 600px) {
+  div.dropdown div.submenu { right: -80px; }
+}
 
 .search { margin: 0px 0px 65px 0px; padding: 0px; background-color: #E5CE9D; border-radius: 0px 0px 3px 3px; box-shadow: 0px 0px 5px #9C3B00; }
 .search > div.inside { padding: 15px 10px 10px 10px; }
