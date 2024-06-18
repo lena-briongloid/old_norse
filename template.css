@@ -37,10 +37,10 @@ div#topbar { xtext-shadow: #9C3B00 1px 1px 0px; padding: 2px 0px; background-col
 div#topbar > div.inside { width: 770px; margin: 0px auto; padding: 7px 0px;  }
 div#topbar a { font-weight: bold; color: #27173D; }
 div#topbar div.clear { clear: both; }
-div#topbar a.logo_image { cursor: pointer; display: inline; }
-@media (max-width: 600px) {
+div#topbar a.logo_image { cursor: pointer; display: inline; margin-right: -50px; }
+
+@media (max-width: 770px) {
 	div#topbar > div.inside { width: auto; margin: auto 10px; }
-  div#topbar a.logo_image { margin-right: -50px; }
 }
 
 div.topcontrol { display: inline; margin-left: 12px; float: right; }
