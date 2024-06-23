@@ -1,10 +1,10 @@
-body { font-family: 'Cormorant Garamond', 'Gowun Batang', 'Tiro Devanagari Sanskrit', 'Charis SIL';, serif; font-size: 24px; padding: 0px; margin: 0px; background-color: #F5DEAD; color: #27173D; overflow-x: hidden; }
+body { font-family: 'Cormorant Garamond', 'Gowun Batang', 'Tiro Devanagari Sanskrit', 'Charis SIL';, serif; font-size: 24px; padding: 0px; margin: 0px; background-color: #F1F6EF; color: #221540; overflow-x: hidden; }
 
-a { text-decoration: none; color: #d17d43; }
+a { text-decoration: none; color: #C37DD0; }
 
 a:hover { text-decoration: underline; }
 
-hr { border : solid 1px #be8d25; }
+hr { border : solid 1px #221540; }
 
 img { border: 0px; max-width: 95%; height: auto; }
 
@@ -33,7 +33,7 @@ div#invelope {width: 770px; margin: 0px auto; position: relative;}
 	div#invelope {width: auto; margin: auto 10px;}
 }
 
-div#topbar { xtext-shadow: #9C3B00 1px 1px 0px; padding: 2px 0px; background-color: #E5CE9D; position: sticky; top: 0; z-index: 1; border-bottom: 1px solid #690202; }
+div#topbar { xtext-shadow: #9C3B00 1px 1px 0px; padding: 2px 0px; background-color: #ECF7E8; position: sticky; top: 0; z-index: 1; border-bottom: 1px solid #BFE1B1; }
 div#topbar > div.inside { width: 770px; margin: 0px auto; padding: 7px 0px;  }
 div#topbar a { font-weight: bold; color: #27173D; }
 div#topbar div.clear { clear: both; }
@@ -47,27 +47,27 @@ div.topcontrol { display: inline; margin-left: 12px; float: right; }
 
 div.topmenu { float: right; }
 div.topmenu a { padding: 3px 10px; border-radius: 2px; display: block; float: left; }
-div.topmenu a.current { background-color: #d17d43; }
+div.topmenu a.current { background-color: #C37DD0; }
 
 div.dropdown { float: right; margin-right: 10px; position: relative; cursor: default; z-index: 20; }
 div.dropdown span.title { padding: 3px 10px; border-radius: 2px 2px 0px 0px; display: block; font-weight: bold;}
-div.dropdown:hover span.title { background-color: #F5DEAD; box-shadow: 2px 2px 2px #9C3B00;}
-div.dropdown div.submenu { display: none; position: absolute; right: 0px; top: 1.5em; margin-top: 2px; white-space: nowrap; background-color: #F5DEAD; padding: 15px 20px 15px 10px; box-shadow: 2px 2px 2px #9C3B00; border-radius: 2px 0px 2px 2px; min-width: 100px; z-index: 20; }
+div.dropdown:hover span.title { background-color: #F1F6EF; box-shadow: 2px 2px 2px #BFE1B1;}
+div.dropdown div.submenu { display: none; position: absolute; right: 0px; top: 1.5em; margin-top: 2px; white-space: nowrap; background-color: #F1F6EF; padding: 15px 20px 15px 10px; box-shadow: 2px 2px 2px #BFE1B1; border-radius: 2px 0px 2px 2px; min-width: 100px; z-index: 20; }
 div.dropdown:hover div.submenu { display: block; }
 div.dropdown div.submenu a { font-weight: normal; display: block; padding: 5px 10px; text-align: right; }
 @media (max-width: 600px) {
   div.dropdown div.submenu { right: -80px; }
 }
 
-.search { margin: 0px 0px 65px 0px; padding: 0px; background-color: #E5CE9D; border-radius: 0px 0px 3px 3px; box-shadow: 0px 0px 5px #9C3B00; }
+.search { margin: 0px 0px 65px 0px; padding: 0px; background-color: #ECF7E8; border-radius: 0px 0px 3px 3px; box-shadow: 0px 0px 5px #BFE1B1; }
 .search > div.inside { padding: 15px 10px 10px 10px; }
-.search div.textbox { position: relative; background-color: #e8f0fe; padding: 8px 30px 8px 8px; }
-.search div.textbox input.text { display: inline; border: 0px; font-family: inherit; font-size: inherit; width: 99%; background-color: #e8f0fe; }
+.search div.textbox { position: relative; background-color: #FAFFF8; padding: 8px 30px 8px 8px; }
+.search div.textbox input.text { display: inline; border: 0px; font-family: inherit; font-size: inherit; width: 99%; background-color: #FAFFF8; }
 .search div.textbox input.text:focus { outline: none; }
 .search div.textbox img.img_query { display: inline-block; cursor: pointer; border: 0px; padding: 0px; width: 32px; position: absolute; top: 7px; right: 10px; bottom: 0px; }
 .search div.message { margin: 10px 0px 0px 2px; font-weight: bold; text-align: right; margin-right: 42px;}
 
-div.footer { background-color: #E5CE9D; font-size: 60%; box-shadow: 0px 0px 2px 0px #666666; }
+div.footer { background-color: #ECF7E8; font-size: 60%; box-shadow: 0px 0px 2px 0px #BFE1B1; }
 div.footer > div.inside { position: relative; width: 770px; margin: 0px auto; padding: 21px 0px 16px 0px; text-align: left; line-height: 1.5em; }
 div.footer a { font-weight: bold; }
 @media (max-width: 770px) {

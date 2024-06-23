@@ -149,6 +149,8 @@ function load_adfb(call = false) {
 	else if (word_class == "a") {
 		source_gram = "<details><summary style=\"font-size: 18px;\">문법 정보 보기</summary>";
 
+		if (gram[0] != "-") {
+
 		source_gram += "<p><strong>원급 강변화</strong>: 단독으로 쓰일 때, 부정형 명사를 수식할 때</p>";
 
 		source_gram += "<table><tr><td>&nbsp;</td><td><strong>남성</strong></td><td><strong>여성</strong></td><td><strong>중성</strong></td></tr>";
@@ -171,6 +173,10 @@ function load_adfb(call = false) {
 		source_gram += "<tr><td><strong>복수 속격</strong><sub>(~들의)</sub></td>";
 		source_gram += "<td colspan=\"3\"><p><strong>" + gram[9] + "</strong></p><small class=\"IPA\">" + sound[9] + "</small></p></td></tr></table><hr>";
 
+		}
+
+		if (gram[10] != "-") {
+
 		source_gram += "<p><strong>원급 약변화</strong>: 고유명사와 정형 명사를 수식할 때</p>";
 
 		source_gram += "<table><tr><td>&nbsp;</td><td><strong>남성</strong></td><td><strong>여성</strong></td><td><strong>중성</strong></td></tr>";
@@ -187,6 +193,10 @@ function load_adfb(call = false) {
 
 		source_gram += "<tr><td><strong>복수</strong><sub>(~들이, ~들의)</sub></td>";
 		source_gram += "<td colspan=\"3\"><p><strong>" + gram[12] + "</strong></p><small class=\"IPA\">" + sound[12] + "</small></p></td></tr></table><hr>";
+
+		}
+
+		if (gram[13] != "-") {
 
 		source_gram += "<p><strong>비교급 약변화</strong></p>";
 
@@ -205,6 +215,10 @@ function load_adfb(call = false) {
 		source_gram += "<tr><td><strong>복수</strong><sub>(~들이, ~들의)</sub></td>";
 		source_gram += "<td colspan=\"3\"><p><strong>" + gram[13] + "</strong></p><small class=\"IPA\">" + sound[13] + "</small></p></td></tr></table><hr>";
 
+		}
+
+		if (gram[15] != "-") {
+
 		source_gram += "<p><strong>최상급 약변화</strong></p>";
 
 		source_gram += "<table><tr><td>&nbsp;</td><td><strong>남성</strong></td><td><strong>여성</strong></td><td><strong>중성</strong></td></tr>";
@@ -221,6 +235,8 @@ function load_adfb(call = false) {
 
 		source_gram += "<tr><td><strong>복수</strong><sub>(~들이, ~들의)</sub></td>";
 		source_gram += "<td colspan=\"3\"><p><strong>" + gram[17] + "</strong></p><small class=\"IPA\">" + sound[17] + "</small></p></td></tr></table>";
+
+		}
 
 		source_gram += "</details>";
 	}
@@ -338,29 +354,20 @@ function load_adfb(call = false) {
 	document.getElementById("abc").innerHTML = source_abc;
 }
 
-//역방향 검색
+//reverse search
 function load_query_ko(text) {
-	text = text.trim();
+	text = text.trim().replaceAll(" ", "");
 
 	let List = [];
 
-	for (var i = 0; i < dict.length; i ++) { for (var j = 0; j < dict_ko.length; j ++) {
-		let db_text = grid(dict, dict_ko[j], i).trim().replaceAll(" ", "");
-		if (db_text.includes(text)) {
-			let duplicate = false;
+	for (var i = 0; i < dict.length; i ++) {
+		let line = db_text[i];
 
-			for (var k = 0; k < List.length; k ++) {
-				if (List[k][0] == i) {
-					duplicate = true; break;
-				}
-			}
-
-			if (duplicate == false) {
-				let gloss = grid(dict, column.gloss_ko, i).replaceAll("<br>", "; ");
-				List.push([i, gloss]);
-			}
+		if (line.includes(text)) {
+			let gloss = grid(dict, column.gloss_ko, i).replaceAll("<br>", "; ");
+			List.push([i, gloss]);
 		}
-	} }
+	}
 
 	show_page(["search_form"], ["suggestions", "mainpage", "ADFB", "abc"]);
 
