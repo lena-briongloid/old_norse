@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>«노르드어 창작 사전» 견본 페이지</title>
+	
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0">
+	<meta name="MobileOptimized" content="300">
+	<meta name="HandheldFriendly" content="true">
+
+	<link rel="stylesheet" type="text/css" href="template.css">
+
+	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Gowun+Batang&family=Cinzel+Decorative:wght@400;700;900&display=swap');
+	</style>
+</style>
+</head>
+
+<body>
+
+<div id="topbar">
+	<div class="inside">
+		<div class="topcontrol">
+			<a href="#top" id = "topcontrol_left" style = "font-size: 20pt; color: #909090;" onclick="undo_call()">◀ <small>뒤로</small></a>&nbsp;&nbsp;
+			<a href="#top" id = "topcontrol_right" style = "font-size: 20pt; color: #909090;" onclick="redo_call()"><small>앞으로</small> ▶</a>
+		</div>
+
+		<div class="dropdown">
+			<span class="title">부록&nbsp;▼</span>
+			<div class="submenu" id="submenu">
+				<a href="#top" style="color: #B0B0B0;">문법 해설</a>
+				<a href="#top" style="color: #B0B0B0;">문자와 발음</a>
+				<a href="#top" onclick="load_appendix('#appendix_runes')">룬 문자</a>
+				<a href="#top" style="color: #B0B0B0;">수와 수사</a>
+				<a href="#top" style="color: #B0B0B0;">날짜와 달</a>
+				<a href="#top" style="color: #B0B0B0;">대명사</a>
+				<a href="#top" style="color: #B0B0B0;">시어와 아어</a>
+			</div>
+		</div>
+		<a class="logo_image" href="#top" onclick="load_main()"><img class="logo" src="resources/logo.png"></a>
+		<div class="clear"></div>
+	</div>
+</div>
+
+<div id="envelope">
+<div id="invelope">
+
+	<form class="search" id="search_form" style="display: block;">
+		<div class="inside">
+			<div class="inset textbox">
+				<input id="text" class="text" name="text" autocomplete="off" placeholder="검색어를 입력하세요." value="">
+				<img class="img_query" src="resources/zoom.png" onclick="load_adfb(false);">
+			</div>
+			<div class="message">
+				<small>특수문자 입력:&nbsp;&nbsp;</small>
+				<a class="char_input" data-char="á">&nbsp;á&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="ð">&nbsp;ð&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="é">&nbsp;é&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="í">&nbsp;í&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="ó">&nbsp;ó&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="ö">&nbsp;ö&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="þ">&nbsp;þ&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="ú">&nbsp;ú&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="ý">&nbsp;ý&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="æ">&nbsp;æ&nbsp;</a>&nbsp;
+				<a class="char_input" data-char="œ">&nbsp;œ&nbsp;</a>&nbsp;
+			</div>
+		</div>
+	</form>
+
+	
+
+	<!--
+		페이지 구조:
+		suggestions - mainpage - propertysettings - NotFound - ADFB - includes - abc
+	-->
+
+	<div class="suggestions" id="suggestions" style="display: none;">
+		<small style="display: inline;">이것을 찾으셨나요?&nbsp;</small>
+		<div id = "suggestions_search" style="display: inline;"> </div>
+		<hr style="margin-top: 15px">		
+	</div>
+
+	<div class="mainpage" id="mainpage" style="display: block;">
+		<h1 style="text-align: center;">«노르드어 창작 사전»</h1>
+		<h2 style="text-align: center;">견본</h2>
+		<h2 style="text-align: center; font-family: 'Cinzel Decorative';">ORðABÓK foRNíSLeNsKU</h2>
+	</div>
+
+	<div class="not_found" id="not_found" style="display: none;">
+		일치하는 검색 결과가 없습니다.
+	</div>
+
+	<div class = "ADFB" id = "ADFB" style = "display: none;">
+		<span class = "ADFB_word_class" style = "font-family: 'Gowun Batang'; font-size: 16px;"> </span>
+		<strong><span class = "ADFB_head_word" style = "font-family: 'Cormorant Garamond'; font-size: 36px;"> </span></strong>
+		<span>&nbsp;</span>
+		<span class = "ADFB_head_sound" style = "font-family: 'Charis SIL'; font-size: 24px;"> </span>
+
+		<div id = "gram"></div>
+		
+		<dl>
+			<hr>
+			<dt><strong>«풀이»</strong></dt>
+			<dd class = "ADFB_gloss_ko"></dd>
+			<hr>
+			<dt><strong>«영문역»</strong></dt>
+			<dd class = "ADFB_gloss_en" style = "font-family: 'Cormorant Garamond';"></dd>
+
+			<hr id = "ADFB_gloss_ep_isExist_hr">
+			<strong><dt class = "ADFB_gloss_ep_isExist"></dt></strong>
+			<dd class = "ADFB_gloss_ep"></dd>
+			<hr id = "ADFB_gloss_ex_isExist_hr">
+			<strong><dt class = "ADFB_gloss_ex_isExist"></dt></strong>
+			<dd class = "ADFB_gloss_ex"></dd>
+		</dl>
+ 	</div>
+
+	<div class="includes" id="includes" style="display: none;">
+		<dl>
+			<hr>
+			<dt><strong>«부분일치 검색어»</strong></dt>
+			<dd id = "includes_search"></dd>
+		</dl>
+	</div>
+
+	<div class="abc" id="abc" style="display: none;">
+	</div>
+
+	<br><hr>
+
+	<div style = "font-size: 18pt; text-align: center; font-weight: bold; display: block;">
+		<p>
+		<a href="#top" onclick="load_abc(this.innerText)">A</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Á</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">B</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">D</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">E</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">F</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">G</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">H</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">I</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Í</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">J</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">K</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">L</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">M</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">N</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">O</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Ó</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Ö</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">P</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">R</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">S</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">T</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">U</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Ú</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">V</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Y</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Ý</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Þ</a> ・
+		<a href="#top" onclick="load_abc(this.innerText)">Æ</a>
+		</p>
+	</div><hr>
+
+	<header>
+		<nav>
+			<a href="#top" id = "topcontrol_up" style = "font-size: 24pt;">▲</a>
+		</nav>
+	</header>
+
+</div> <!--end invelope-->
+</div> <!--end envelope-->
+
+<div class="footer">
+	<div class="inside">
+		<p>본 사이트의 컨텐츠의 일부 또는 전부를 전재, 양도, 재배포하는 행위는 저작권법에 의하여 금지됩니다.</p>
+		<div style="line-height: 60%; text-align: right;">
+		<p>
+			트위터(X): <a href="https://x.com/lena_briongloid" target="_blank">@lena_briongloid</a>
+		</p>
+		<p>
+			이메일: <a>lenabriongloid@gmail.com</a>
+		</p>
+		</div>
+		<p style="color:#909090; text-align:right;"><em>Copyright 2024. 유월 All rights reserved.</em></p>
+	</div>
+</div>
+
+
+
+
+<!-- input diacritics with mouse clicks -->
+<script>
+	document.querySelectorAll(".char_input").forEach(link => {
+	  link.addEventListener("click", function(event) {
+	    event.preventDefault();
+	    const char = link.getAttribute("data-char");
+	    document.getElementById("text").value += char;
+	  });
+	});
+</script>
+
+<!-- Enter Input -->
+<script>
+	// bootstrap search module
+	let input = document.getElementById("text");
+
+	input.addEventListener("keydown", function(event) {
+		if ((event.key === "Enter" || event.keyCode === 13) && document.getElementById("search_form").style.display != "none") {
+			event.preventDefault();
+			load_adfb(false);
+		}
+	});
+</script>
+
+<!-- 임시 생성된 링크 -->
+<script>
+	function link(address) {
+		if (address == Page) { return 0; }
+
+		let anchor = document.getElementById(address);
+		document.getElementById("text").value = address;
+
+		document.getElementById("topcontrol_up").click();
+
+		load_adfb(false);
+	}
+</script>
+
+<!-- ABC 목록 전부 보여주기 -->
+<script>
+	function load_abc(chr, call = false) {
+		show_page(["search_form", "mainpage"], ["suggestions", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#" + chr); }
+
+		var List = [];
+
+		for (var j = 0; grid(dict, column.title, j) != ""; j ++) {
+			if (grid(dict, column.title, j).charAt(0).toUpperCase() == chr) {
+				List.push(j);
+			}
+		}
+
+		let source = "<h2 style=\"text-align: center;\">" + chr + "</h2>";
+
+		for (var i = 0; i < List.length; i ++) {
+			let link = grid(dict, column.key, List[i]);
+			let t0 = grid(dict, column.title, List[i]);
+			let t1 = grid(dict, column.tag_synonym, List[i]);
+
+			let text = t0 + "<sup>" + t1 + "</sup>";
+
+			source += "<a onclick=\"link('" + link + "')\">" + text + "</a>";
+			if (i < List.length - 1) {
+				source += " ・ ";
+			}
+		}
+
+		document.getElementById("mainpage").innerHTML = source;
+	}
+</script>
+
+<!-- 앞으로 & 뒤로 가기 -->
+<script>
+	var Undo = []; var Redo = []; var Page = "#main";
+
+	function undo_stack(text) {
+		Undo.push(Page);
+		Page = text;
+		Redo = [];
+
+		undo_graphic();
+	}
+
+	//call undo & stack redo
+	function undo_call() {
+		if (Undo.length == 0) { return 0; }
+
+		//stack redo
+		Redo.push(Page);
+
+		//call undo
+		Page = Undo.pop();
+
+		//load
+		load_adfb(Page);
+
+		undo_graphic();
+	}
+
+	function redo_call() {
+		if (Redo.length == 0) { return 0; }
+
+		//stack undo
+		Undo.push(Page);
+
+		//call redo
+		Page = Redo.pop();
+
+		//load
+		load_adfb(Page);
+
+		undo_graphic();
+	}
+
+	//graphics
+	function undo_graphic() {
+		document.getElementById("topcontrol_left").style.color = Undo.length > 0 ? color.text : color.disabled;
+		document.getElementById("topcontrol_right").style.color = Redo.length > 0 ? color.text : color.disabled;
+	}
+</script>
+
+<!-- 그래픽 -->
+<script>
+	const color = {
+		background: 	"#F1F6EF",
+		text: 			"#221540",
+		anchor: 		"#C37DD0",
+		disabled: 		"#909090",
+		textbox: 		"#F5DEAD"
+	}
+
+	function show_page(array_show, array_hide = []) {
+		for (var i = 0; i < array_show.length; i ++) {
+			document.getElementById(array_show[i]).style.display = "block";
+		}
+
+		for (var i = 0; i < array_hide.length; i ++) {
+			document.getElementById(array_hide[i]).style.display = "none";
+		}
+	}
+</script>
+
+<!-- 메인 페이지로 -->
+<script>
+	function load_main(call = false) {
+		show_page(["search_form", "mainpage"], ["suggestions", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack("#main"); }
+
+		let source_main = "";
+
+		source_main += "<div style=\"text-align: center;\"><img src=\"resources/main.png\" style=\"width:70%;\"></div><h1 style=\"text-align: center;\">«노르드어 창작 사전»</h1><h2 style=\"text-align: center; font-family: 'Cinzel Decorative';\">ORðABÓK foRNíSLeNsKU</h2><h3 style=\"text-align: center;\">견본</h3>";
+
+		document.getElementById("mainpage").innerHTML = source_main;
+	}
+
+	window.onload = load_main(true);
+</script>
+
+<!-- 부록 -->
+<script>
+	function load_appendix(page, call = false) {
+		show_page(["search_form", "mainpage"], ["suggestions", "not_found", "ADFB", "includes", "abc"]);
+
+		if (call == false) { undo_stack(page); }
+
+		let source_appendix = "";
+
+		switch (page) {
+			case "#appendix_runes":
+				source_appendix = "<div style=\"line-height: 200%;\"><h1 style=\"text-align: center;\">«룬 문자와 노르드어»</h1><h2 style=\"text-align: center; font-family: 'Cinzel Decorative';\">NoRRœNsRúN</h2><hr><p>본서에서 다루는 고대 노르드어는 <strong>12-13세기</strong>에 <strong>아이슬란드</strong>에서 쓰이던 언어를 말하며, 다른 말로는 “서부 노르드어” 또는 “고대 아이슬란드어”라고도 한다.</p><p>이 시대는 노르웨이, 스웨덴, 덴마크는 물론 외딴 섬인 아이슬란드까지 거의 완전히 기독교화가 끝난 시점이며, 문자 생활을 향유하는 상류층에는 라틴 문자가 널리 퍼져 있었다. 룬 문자 중 가장 유명한 형태인 <strong>고 푸타르크</strong><small>(Elder Futhark)</small>는 5세기경, 그 파생형이자 다음으로 유명한 <strong>소 푸타르크</strong><small>(Younger Futhark)</small>는 11세기경에 이미 소멸하였다. 12세기 이후에는 «룬의 서<small><em>(Codex Runicus)</em></small>»를 비롯한 극소수의 문헌에서 룬 문자의 마지막 진화형인 <strong>중세 룬</strong><small>(Medieval Runes)</small>이 쓰였다.</p><p>다음 표는 14세기 사본인 «룬의 서»를 기반으로 하여 고대 노르드어의 로마자와 룬 문자 표기의 대응을 나타낸 것이다.</p><br><hr><br><table><tr height=\"70\"><td><strong>로마자</strong></td><td><strong>중세 룬</strong></td><td><strong>룬 이름</strong></td><td><strong>룬의 뜻</strong></td></tr><tr height=\"70\"><td>a á</td><td>ᛆ</td><td>아르;&nbsp;ár</td><td>수확 <small>(harvest)</small></td></tr><tr height=\"70\"><td>b</td><td>ᛒ</td><td>뱌르칸;&nbsp;bjarkan</td><td>자작나무 <small>(birch)</small></td></tr><tr height=\"70\"><td>d ð</td><td>ᛑ</td><td>다그르;&nbsp;dagr</td><td>나날 <small>(day)</small></td></tr><tr height=\"70\"><td>e é</td><td>ᛂ</td><td colspan=\"2\">점 찍힌 이스;&nbsp;stunginn íss</td></tr><tr height=\"70\"><td>f</td><td>ᚠ</td><td>페;&nbsp;fé</td><td>풍요 <small>(abundance)</small></td></tr><tr height=\"70\"><td>g</td><td>ᚵ</td><td colspan=\"2\">점 찍힌 카운;&nbsp;stunginn kaun</td></tr><tr height=\"70\"><td>h</td><td>ᚼ</td><td>하갈;&nbsp;hagall</td><td>우박 <small>(hail)</small></td></tr><tr height=\"70\"><td>i í j</td><td>ᛁ</td><td>이스;&nbsp;íss</td><td>얼음 <small>(ice)</small></td></tr><tr height=\"70\"><td>k</td><td>ᚴ</td><td>카운;&nbsp;kaun</td><td>종양 <small>(ulcer)</small></td></tr><tr height=\"70\"><td>l</td><td>ᛚ</td><td>로그르;&nbsp;lögr</td><td>바다 <small>(sea)</small></td></tr><tr height=\"70\"><td>m</td><td>ᛘ</td><td>마드르;&nbsp;maðr</td><td>인간 <small>(man)</small></td></tr><tr height=\"70\"><td>n</td><td>ᚿ</td><td>나우드;&nbsp;nauð</td><td>고통 <small>(need)</small></td></tr><tr height=\"70\"><td>o ó ö</td><td>ᚮ</td><td>오스;&nbsp;óss</td><td>신족 <small>(Áss)</small></td></tr><tr height=\"70\"><td>p</td><td>ᛕ</td><td>플라스트르;&nbsp;plástr</td><td>회반죽 <small>(plaster)</small></td></tr><tr height=\"70\"><td>r</td><td>ᚱ</td><td>레이드;&nbsp;reið</td><td>기마 <small>(the ride)</small></td></tr><tr height=\"70\"><td>s z</td><td>ᛋ</td><td>솔;&nbsp;sól</td><td>태양 <small>(sun)</small></td></tr><tr height=\"70\"><td>t</td><td>ᛐ</td><td>튀르;&nbsp;tyr</td><td>신성 <small>(god)</small></td></tr><tr height=\"70\"><td>u ú v</td><td>ᚢ</td><td>우르;&nbsp;úr</td><td>폭우 <small>(shower)</small></td></tr><tr height=\"70\"><td>x</td><td>ᚴᛋ</td><td colspan=\"2\">(k + s)</td></tr><tr height=\"70\"><td>y ý</td><td>ᛦ</td><td>위르;&nbsp;ýr</td><td>주목나무 <small>(yew)</small></td></tr><tr height=\"70\"><td>æ</td><td>ᛅ</td><td>아르;&nbsp;ár</td><td>수확 <small>(harvest)</small></td></tr><tr height=\"70\"><td>þ</td><td>ᚦ</td><td>투르스;&nbsp;þurs</td><td>거인 <small>(jötunn)</small></td></tr><tr height=\"70\"><td>ø œ</td><td>ᚯ</td><td>오스;&nbsp;óss</td><td>신족 <small>(Áss)</small></td></tr></table><br><hr><br><p>아래는 «고 에다»의 한 구절을 사용한 실제 예시이다.</p><p><strong>로마자</strong>: Máni heitir með mönnum, en mylinn með goðum, kalla hverfanda hvél helju í, skyndi jötnar, en skin dvergar, kalla alfar ártala.</p><p><strong>룬 문자</strong>: ᛘᛆᚿᛁ ᚼᛂᛁᛐᛁᚱ ᛘᛂᛑ ᛘᚮᚿᚿᚢᛘ, ᛂᚿ ᛘᛦᛚᛁᚿᚿ ᛘᛂᛑ ᚵᚮᛑᚢᛘ, ᚴᛆᛚᛚᛆ ᚼᚢᛂᚱᚠᛆᚿᛑᛆ ᚼᚢᛂᛚ ᚼᛂᛚᛁᚢ ᛁ, ᛋᚴᛦᚿᛑᛁ ᛁᚮᛐᚿᛆᚱ, ᛂᚿ ᛋᚴᛁᚿ ᛑᚢᛂᚱᚵᛆᚱ, ᚴᛆᛚᛚᛆ ᛆᛚᚠᛆᚱ ᛆᚱᛐᛆᛚᛆ.</p></div>";
+			break
+		}
+
+		document.getElementById("mainpage").innerHTML = source_appendix;
+	}
+</script>
+
+<!-- DB 관리 -->
+<script>
+	function grid(grid, x, y) {
+		if (x < 0 || y < 0 || y >= grid.length || x >= grid[y].length) {
+			return "";
+		}
+		else {
+			return grid[y][x];
+		}
+	}
+
+	function grid_width(grid) {
+		return grid[0].length;
+	}
+
+	function grid_height(grid) {
+		return grid.length;
+	}
+
+	function remove_diacritics(text) {
+		const Dia1 = ["á", "ð", "é", "í", "ó", "ö", "þ", "ú", "ý", "æ", "œ"];
+		const Dia2 = ["a", "d", "e", "i", "o", "o", "t", "u", "y", "a", "o"];
+
+		for (var i = 0; i < Dia1.length; i ++) {
+			text = text.replaceAll(Dia1[i], Dia2[i]);
+		}
+
+		return text;
+	}
+</script>
+
+<!-- SCRIPT OF LANGUAGE -->
+<script>
+	const lang = "non"; //language iso code
+
+	function includeScripts(scriptPaths) {
+		scriptPaths.forEach(function(path) {
+			var script = document.createElement('script');
+			script.src = path;
+			document.head.appendChild(script);
+		});
+	}
+
+	const lang_scr = [
+		lang + "/adfb.js",		// grammar extraction & display
+	]
+
+	includeScripts(lang_scr);
+</script>
+
+
+
+<!-- DB Raw Data -->
+<script>
+const csv_00045 = ["allr_a","allr","a","","","알르","모든, 전부의, 완전한<br><small>(비유)</small> 지난, 지나간, 죽은, 사라진, 소멸한","all, entire, whole, full<br><small>(metaph.)</small> past, gone, dead, extinct","","<em>Hón á allan arf eptir mik.</em> <small class=\"IPA\">[혼 아 알란 아르브 에프티르 미크]</small> 내가 죽거든 그녀가 나의 유산을 모두 가지리라.<br><em>Allt er mi mitt megin.</em> <small class=\"IPA\">[알트 에르 미 미트 메긴]</small> 나의 힘이 다 사라졌구나.<br><em>allraheilagradagr</em> <small class=\"IPA\">[알라헤일라그라다그르]</small> 모든 성인 축일, 만성절<br><em>allsherjarlýðr</em> <small class=\"IPA\">[알스헤랴를뤼드르]</small> 모든 사람들. 대중, 평민.<br><em>allvald</em> <small class=\"IPA\">[알왈드]</small> 모든 것을 다스림. 절대권력.","allr<br>알르","öll<br>올","allt<br>알트","alls<br>알스","allrar<br>알라르","alls<br>알스","allir<br>알리르","allar<br>알라르","öll<br>올","allra<br>알라","-<br>-","-<br>-","-<br>-","","","","",""];
+const csv_00070 = ["annarr_a","annarr","a","","","안나르","둘 중 하나의, 다른<br>두 번째의, 잇따르는<br>다른, 또 다른","one of two, the other<br>the second, following<br>another, different","","<em>önnur misseri</em> <small class=\"IPA\">[온누르 미세리]</small> 잇따르는 해.<br><em>annarr mestr maðr</em> <small class=\"IPA\">[안나르 메스트르 마드르]</small> 두 번째로 위대한 사람.<br><em>annarskostar</em> <small class=\"IPA\">[안나르스코스타르]</small> 그렇지 않으면, 그 외에는.<br><em>annarsstaðar</em> <small class=\"IPA\">[안나르스타다르]</small> 다른 곳에서.<br><em>annarsvegar</em> <small class=\"IPA\">[안나르스웨가르]</small> 한편, 반면에.","annarr<br>안나르","önnur<br>온누르","annat<br>안나트","annars<br>안나르스","annarrar<br>안나라르","annars<br>안나르스","aðrir<br>아드리르","aðrar<br>아드라르","önnur<br>온누르","annarra<br>안나라","-<br>-","-<br>-","-<br>-","","","","",""];
+const csv_00101 = ["ást_f","ást","f","","","아스트","사랑, 애정, 애착","love, affection","","<em>ástin mín</em> <small class=\"IPA\">[아스틴 민]</small> 내 사랑.<br><em>ástareldr</em> <small class=\"IPA\">[아스타렐드르]</small> 사랑의 불꽃.<br><em>ástarilmr</em> <small class=\"IPA\">[아스타릴름르]</small> 사랑의 달콤함.<br><em>ástarorð</em> <small class=\"IPA\">[아스타로르드]</small> 사랑의 말.<br><em>ástarsigr</em> <small class=\"IPA\">[아스타르시그르]</small> 사랑의 승리.","ást<br>아스트","ástar<br>아스타르","ástir<br>아스티르","ásta<br>아스타","ástin<br>아스틴","ástarinnar<br>아스타린나르","ástirnar<br>아스티르나르","ástanna<br>아스탄나","","","","","","","","","",""];
+const csv_00102 = ["ástblindr_a","ástblindr","a","","","아스트블린드르","사랑에 눈 먼","blind from love, love-blind","","","ástblindr<br>아스트블린드르","ástblind<br>아스트블린드","ástblint<br>아스트블린트","ástblinds<br>아스트블린드스","ástblindrar<br>아스트블린드라르","ástblinds<br>아스트블린드스","ástblindir<br>아스트블린디르","ástblindar<br>아스트블린다르","ástblind<br>아스트블린드","ástblindra<br>아스트블린드라","ástblindi<br>아스트블린디","ástblinda<br>아스트블린다","ástblindu<br>아스트블린두","ástblindari<br>아스트블린다리","ástblindara<br>아스트블린다라","ástblindasti<br>아스트블린다스티","ástblindasta<br>아스트블린다스타","ástblindustu<br>아스트블린두스투"];
+const csv_00208 = ["berserkr_m","berserkr","m","","","베르세르크르","광전사, 버서커, 베르세르크","a bear-sark, wild warrior or champion, berserker","본래 “곰 가죽 옷”을 뜻하는 말이며, 곰 가죽을 뒤집어쓴 용맹한 전사를 말한다. 미친 듯한 분노에 휩싸여 적을 도륙하는 모습에 기인하여 광전사라는 호칭이 붙었다.","<em>berserksgangr</em> <small class=\"IPA\">[베르세르크스강그르]</small> 광전사의 격노. 도륙하는 광기. 광전사는 모종의 방법으로 강렬한 환각에 빠진 채로 싸움에 임했다고 전해진다.","berserkr<br>베르세르크르","berserks<br>베르세르크스","berserkir<br>베르세르키르","berserkja<br>베르세르캬","berserkrinn<br>베르세르크린","berserksins<br>베르세르크신스","berserkirnir<br>베르세르키르니르","berserkjanna<br>베르세르캰나","","","","","","","","","",""];
+const csv_00240 = ["björn_m","björn","m","","","뵤른","곰, 수컷 곰, 수콤, 수곰","a male bear","","<em>bjarnskinn</em> <small class=\"IPA\">[뱌른스킨]</small> 곰 가죽.<br><em>bjarnfeldr</em> <small class=\"IPA\">[뱌른벨드르]</small> 곰 가죽 망토.<br><em>bjarnólpa</em> <small class=\"IPA\">[뱌르놀파]</small> 곰 가죽 재킷.<br><em>hvítabjörn</em> <small class=\"IPA\">[흐위타뵤른]</small> 흰 곰. 북극곰.<br><em>bjarnarhrammr</em> <small class=\"IPA\">[뱌르나르흐람르]</small> 곰 발바닥.<br><em>bjarnbáss</em> <small class=\"IPA\">[뱌른바스]</small> 곰 잡는 구덩이, 함정.","björn<br>뵤른","bjarnar<br>뱌르나르","birnir<br>비르니르","bjarna<br>뱌르나","björninn<br>뵤르닌","bjarnarins<br>뱌르나린스","birnirnir<br>비르니르니르","bjarnanna<br>뱌르난나","","","","","","","","","",""];
+const csv_00434 = ["dróttning_f","dróttning","f","","","드로트닝그","여주인<br>여왕, 여성 군주","a mistress<br>a queen, lady","","<em>drottningarmaðr</em> <small class=\"IPA\">[드로트닝가르마드르]</small> 여왕의 남편. 국서.","dróttning<br>드로트닝그","dróttningar<br>드로트닝가르","dróttningar<br>드로트닝가르","dróttninga<br>드로트닝가","dróttningin<br>드로트닝긴","dróttningarinnar<br>드로트닝가린나르","dróttningarnar<br>드로트닝가르나르","dróttninganna<br>드로트닝간나","","","","","","","","","",""];
+const csv_00486 = ["eiga1_f","eiga","f","1","","에이가","소유, 재산, 자산","ownership, property","","","eiga<br>에이가","eigu<br>에이구","eigur<br>에이구르","eigna<br>에이그나","eigan<br>에이간","eigunnar<br>에이군나르","eigurnar<br>에이구르나르","eignanna<br>에이그난나","","","","","","","","","",""];
+const csv_00487 = ["eiga2_v","eiga","v","2","","에이가","가지다, 소유하다, 지니다, 보유하다<br>의무를 지다, 책임을 지다","to have, possess<br>to be bound, to have to do","","<em>eiga konu</em> <small class=\"IPA\">[에이가 코누]</small> 여자를 가지다. 아내로 맞다.<br><em>eiga börn</em> <small class=\"IPA\">[에이가 보른]</small> 아이를 얻다.","eiga<br>에이가","eigandi<br>에이간디","eiganda<br>에이간다","","","","","","","","","","","","","","",""];
+const csv_00499 = ["einn_a","einn","a","","","에인","하나<small>(1)</small>, 하나의<br>외딴, 혼자인, 외로운<br>하나뿐인, 단 하나의","one, a, an, single<br>alone<br>only","","<em>einherjar</em> <small class=\"IPA\">[에인헤랴르]</small> 선택받은 무리. 발할라의 전사들.<br><em>einhyrningr</em> <small class=\"IPA\">[에인휘르닝그르]</small> 일각수. 유니콘.<br><em>einvald</em> <small class=\"IPA\">[에인왈드]</small> 군주국, 왕국, 주권 국가.","einn<br>에인","ein<br>에인","eitt<br>에이트","eins<br>에인스","einnar<br>에인나르","eins<br>에인스","einir<br>에이니르","einar<br>에이나르","ein<br>에인","einna<br>에인나","eini<br>에이니","eina<br>에이나","einu<br>에이누","einni<br>에인니","einna<br>에인나","-<br>-","-<br>-","-<br>-"];
+const csv_00508 = ["elda_v","elda","v","","","엘다","불을 피우다, 불을 붙이다, 불을 켜다<br>요리하다, 조리하다, 굽다","to light, kindle a fire<br>to cook","","","elda<br>엘다","eldandi<br>엘단디","eldanda<br>엘단다","","","","","","","","","","","","","","",""];
+const csv_00509 = ["eldberi_m","eldberi","m","","","엘드베리","화로, 난로, 등불","a brasier, lantern","","","eldberi<br>엘드베리","eldbera<br>엘드베라","eldberar<br>엘드베라르","eldbera<br>엘드베라","eldberinn<br>엘드베린","eldberans<br>엘드베란스","eldberarnir<br>엘드베라르니르","eldberanna<br>엘드베란나","","","","","","","","","",""];
+const csv_00510 = ["eldligr_a","eldligr","a","","","엘들리그르","불타는, 불 같은, 맹렬한","fiery, of fire","","","eldligr<br>엘들리그르","eldlig<br>엘들리그","eldligt<br>엘들리흐트","eldligs<br>엘들리흐스","eldligrar<br>엘들리그라르","eldligs<br>엘들리흐스","eldligir<br>엘들리기르","eldligar<br>엘들리가르","eldlig<br>엘들리그","eldligra<br>엘들리그라","eldligi<br>엘들리기","eldliga<br>엘들리가","eldligu<br>엘들리구","eldligari<br>엘들리가엘들리","eldligara<br>엘들리가라","eldligasti<br>엘들리가스티","eldligasta<br>엘들리가스타","eldligustu<br>엘들리구스투"];
+const csv_00511 = ["eldr_m","eldr","m","","","엘드르","불, 불꽃, 화염<br>화산 폭발","fire, spark<br>the eruption of a volcano","","<em>eldsstólpi</em> <small class=\"IPA\">[엘드스톨피]</small> 불기둥.<br><em>eldsmatr</em> <small class=\"IPA\">[엘드스마트르]</small> 불의 먹이. 장작.","eldr<br>엘드르","elds<br>엘드스","eldar<br>엘다르","elda<br>엘다","eldrinn<br>엘드린","eldsins<br>엘드신스","eldarnir<br>엘다르니르","eldanna<br>엘단나","","","","","","","","","",""];
+const csv_00569 = ["fall_n","fall","n","","","팔","떨어짐, 낙하, 추락, 영락<br>몰락, 파멸, 파탄, 붕괴, 타락, 퇴락, 쇠퇴","a fall<br><small>(metaph.)</small> downfall, ruin, decay","","<em>sjávarföll</em> <small class=\"IPA\">[샤와르볼]</small> 조수. 밀물과 썰물.<br><em>fall engla</em> <small class=\"IPA\">[팔 엥글라]</small> 천사의 타락.","fall<br>팔","falls<br>팔스","föll<br>폴","falla<br>팔라","fallit<br>팔리트","fallsins<br>팔신스","föllin<br>폴린","fallanna<br>팔란나","","","","","","","","","",""];
+const csv_00570 = ["falla_v","falla","v","","","팔라","떨어지다, 추락하다, 영락하다, 전락하다, 타락하다<br>물이 흐르다","to fall<br>to flow, run, of water, stream, tide, etc.","","<em>falla í villu</em> <small class=\"IPA\">[팔라 이 윌루]</small> 이교에 빠져들다.","falla<br>팔라","fallandi<br>팔란디","fallanda<br>팔란다","","","","","","","","","","","","","","",""];
+const csv_00571 = ["fals_n","fals","n","","","팔스","사기, 사칭, 기만, 현혹, 미혹, 협잡, 속임수","a fraud, cheat, deceit, imposture","","<em>falsguð</em> <small class=\"IPA\">[팔스구드]</small> 거짓 신, 가짜 신.<br><em>falskonungr</em> <small class=\"IPA\">[팔스코눙그르]</small> 거짓 왕, 가짜 왕.<br><em>falsvitni</em> <small class=\"IPA\">[팔스위트니]</small> 위증, 거짓 증언.","fals<br>팔스","fals<br>팔스","föls<br>폴스","falsa<br>팔사","falsit<br>팔시트","falsins<br>팔신스","fölsin<br>폴신","falsanna<br>팔산나","","","","","","","","","",""];
+const csv_00573 = ["falskr_a","falskr","a","","","팔스크르","거짓의, 거짓된, 가짜의","false","","","falskr<br>팔스크르","fölsk<br>폴스크","falskt<br>팔스크트","falsks<br>팔스크스","falskrar<br>팔스크라르","falsks<br>팔스크스","falskir<br>팔스키르","falskar<br>팔스카르","fölsk<br>폴스크","falskra<br>팔스크라","falski<br>팔스키","falska<br>팔스카","fölsku<br>폴스쿠","falskari<br>팔스카리","falskara<br>팔스카라","falskasti<br>팔스카스티","falskasta<br>팔스카스타","fölskustu<br>폴스쿠스투"];
+const csv_00583 = ["fara_v","fara","v","","","파라","가다, 여행하다<br>나아가다, 지나가다, 통과하다","to go, fare, travel<br>to go forth or through, pass","","<em>Fjölð ek fór.</em> <small class=\"IPA\">[푤드 에크 포르]</small> 나는 멀리 여행했다.","fara<br>파라","farandi<br>파란디","faranda<br>파란다","","","","","","","","","","","","","","",""];
+const csv_00804 = ["gandr_m","gandr","m","","","간드르","괴물, 마귀, 악마","'gand', a monster, fiend","의미가 모호한 말로, 일반적으로 흉악한 괴물 또는 그에 준하는 현상을 가리키는 것으로 여겨진다. 사악한 마술 혹은 주술을 가리키기도 하는데, 이를 영문으로 witchcraft 또는 black magic 따위로 옮기기도 한다.","<em>Jörmungandr</em> <small class=\"IPA\">[요르문간드르]</small> 요르문간드, 괴물의 이름. “커다란 괴물”.<br><em>Gandálfr</em> <small class=\"IPA\">[간달브르]</small> 간달프, 난쟁이의 이름. “요술사, 홀린 마귀”.<br><em>Gandvík</em> <small class=\"IPA\">[간드위크]</small> 환혹의 바다. 오늘날의 러시아 콜라 반도의 백해<small>(White Sea)</small>를 가리키는 것으로 추측된다.<br><em>gandreið</em> <small class=\"IPA\">[간드레이드]</small> 마녀의 탈것. 빗자루 혹은 늑대.","gandr<br>간드르","gands<br>간드스","gandar<br>간다르","ganda<br>간다","gandrinn<br>간드린","gandsins<br>간드신스","gandarnir<br>간다르니르","gandanna<br>간단나","","","","","","","","","",""];
+const csv_00805 = ["ganga_v","ganga","v","","","강가","가다, 걷다, 걸어가다","to go, walk","","<em>ganga tungls</em> <small class=\"IPA\">[강가 퉁글스]</small> 달의 운행.","ganga<br>강가","gangandi<br>강간디","ganganda<br>강간다","","","","","","","","","","","","","","",""];
+const csv_00808 = ["garðr_m","garðr","m","","","가르드르","뜰, 정원, 마당<br>근거지, 요새, 성채<br>울타리","a yard<br>a stronghold<br>a fence","","<em>Ásgarðr</em> <small class=\"IPA\">[아스가르드르]</small> 신들의 성채. 아스가르드.<br><em>Miðgarðr</em> <small class=\"IPA\">[미드가르드르]</small> 가운데 땅. 미드가르드.<br><em>Mikligarðr</em> <small class=\"IPA\">[미클리가르드르]</small> 위대한 성채. 콘스탄티노폴리스.","garðr<br>가르드르","garðs<br>가르드스","garðar<br>가르다르","garða<br>가르다","garðrinn<br>가르드린","garðsins<br>가르드신스","garðarnir<br>가르다르니르","garðanna<br>가르단나","","","","","","","","","",""];
+const csv_00919 = ["gramr_m","gramr","m","","","그람르","<small>(신의)</small> 분노, 격노, 진노<br><small>(시어)</small> 왕, 군주, 전사, 투사","wrath, esp. of the gods<br>a king, warrior","시그문드가 파프니르를 죽이는 데 쓴 검의 이름이기도 하다.","","gramr<br>그람르","grams<br>그람스","gramir<br>그라미르","grama<br>그라마","gramrinn<br>그람린","gramsins<br>그람신스","gramirnir<br>그라미르니르","gramanna<br>그라만나","","","","","","","","","",""];
+const csv_00956 = ["guð_m","guð","m","","","구드","신","God","주로 기독교의 신을 가리키는 말이다.","<em>Hér sé Guð.</em> <small class=\"IPA\">[헤르 세 구드]</small> 여기에 신 있으라. 남의 집에 들어갈 때 하는 말.<br><em>Guðs ást.</em> <small class=\"IPA\">[구드스 아스트]</small> 신께서 사랑하시기를. 감사합니다.<br><em>Guð blessi þig.</em> <small class=\"IPA\">[구드 블레시 시그]</small> 신께서 그대를 축복하시기를.","guð<br>구드","guðs<br>구드스","guðir<br>구디르","guða<br>구다","guðinn<br>구딘","guðsins<br>구드신스","guðirnir<br>구디르니르","guðanna<br>구단나","","","","","","","","","",""];
+const csv_00899 = ["góðr_a","góðr","a","","","고드르","좋은, 올바른, 정직한, 친절한, 착한<br>재능 있는, 소질 있는, 호의적인<br>질 좋은, 상당한, 잘생긴, 예쁜, 부유한<br>건강에 좋은, 건전한, 유익한","good, righteous, honest, kind<br>gifted, favourable<br>goodly, fine, rich<br>wholesome","","<em>mínn góðr, mín góð</em> <small class=\"IPA\">[민 고드르, 민 고드]</small> <small>(각각 남자, 여자에게)</small> 나의 사랑.<br><em>gott skáld</em> <small class=\"IPA\">[고트 스칼드]</small> 훌륭한 시.<br><em>góðlífi</em> <small class=\"IPA\">[고들리비]</small> 좋은 삶.<br><em>góðindi</em> <small class=\"IPA\">[고딘디]</small> 은혜, 좋은 선물.","góðr<br>고드르","góð<br>고드","gott<br>고트","góðs<br>고드스","góðrar<br>고드라르","góðs<br>고드스","góðir<br>고디르","góðar<br>고다르","góð<br>고드","góðra<br>고드라","góði<br>고디","góða<br>고다","góðu<br>고두","betri<br>베트리","betra<br>베트라","bezti<br>베츠티","bezta<br>베츠타","beztu<br>베츠투"];
+const csv_00980 = ["haf_n","haf","n","","","하브","바다, 대양","the sea, ocean","","<em>Dumbshaf</em> <small class=\"IPA\">[둠브스하브]</small> 북극해.<br><em>Íslandshaf</em> <small class=\"IPA\">[이슬란드스하브]</small> 아이슬란드 해. 아이슬란드와 노르웨이 사이의 바다, 즉 북해를 가리키는 말.<br><em>Írlandshaf</em> <small class=\"IPA\">[이를란드스하브]</small> 아일랜드 해. 대서양을 가리키는 말.<br><em>hafsleipnir</em> <small class=\"IPA\">[하브슬레이프니르]</small> 바다를 미끄러지는 자. 배.","haf<br>하브","hafs<br>하브스","höf<br>호브","hafa<br>하바","hafit<br>하비트","hafsins<br>하브신스","höfin<br>호빈","hafanna<br>하반나","","","","","","","","","",""];
+const csv_00981 = ["hafa_v","hafa","v","","","하바","가지다, 잡다, 쥐다, 지키다, 관리하다<br>관찰하다, 감시하다, 기념하다<br>사용하다<br>얻다, 잡다, 붙잡다, 붙들다, 획득하다<br>가지고 다니다, 나르다, 운반하다, 입다<br>살다, 거주하다, 유지하다, 머무르다<br>행동하다, 행하다, 하다","to have, hold, keep, maintain<br>to observe, celebrate<br>to use<br>to take, catch, get<br>to carry, wear<br>to keep, dwell, abide<br>to behave, act, do","영어의 have에 대응하며, 매우 광범위한 의미를 가지고 자주 사용되는 동사이다.","<em>hafa elda</em> <small class=\"IPA\">[하바 엘다]</small> 불을 지키다. 요리하다.<br><em>hafa vetr</em> <small class=\"IPA\">[하바 웨트르]</small> 겨울을 살다, 나이를 먹다.<br><em>hafa svefn</em> <small class=\"IPA\">[하바 스웨븐]</small> 잠을 가지다, 잠자다.<br><em>hafa hátt</em> <small class=\"IPA\">[하바 하트]</small> 시끄럽게 굴다.<br><em>hafa nafn Drottins í hégóma</em> <small class=\"IPA\">[하바 나븐 드로틴스 이 헤고마]</small> 군주의 이름을 함부로 들먹이다.<br><em>hafa mál fram</em> <small class=\"IPA\">[하바 말 프람]</small> 정복을 입고 나아가다.","hafa<br>하바","hafandi<br>하반디","hafanda<br>하반다","","","","","","","","","","","","","","",""];
+const csv_01017 = ["hár1_n","hár","n","1","","하르","머리카락, 머리칼, 머릿결, 털","hair","","<em>hárdregill</em> <small class=\"IPA\">[하르드레길]</small> 머리를 묶는 리본","hár<br>하르","hárs<br>하르스","hár<br>하르","hára<br>하라","hárit<br>하리트","hársins<br>하르신스","hárin<br>하린","háranna<br>하란나","","","","","","","","","",""];
+const csv_01018 = ["hár2_a","hár","a","2","","하르","높은, 키가 큰<br>존귀한, 숭고한, 지고한, 장엄한, 영예로운<br>소리가 큰, 시끄러운<br>오딘<small>(Óðinn)</small>을 가리키는 다른 이름","high, tall<br>sublime, glorious<br>loud<br>Odin the High","","<em>Hávamál</em> <small class=\"IPA\">[하와말]</small> 높으신 분의 말씀. «고 에다»의 시가 중 하나.<br><em>Hárr, Jafnhárr, Þriði</em> <small class=\"IPA\">[하르, 야븐하르, 스리디]</small> 높으신 분, 높으신 분만큼 높으신 분, 세 번째로 높으신 분. 오딘의 이름들.","hár<br>하르","há<br>하","hátt<br>하트","hás<br>하스","hárrar<br>하라르","hás<br>하스","hávir<br>하위르","hávar<br>하와르","há<br>하","hárra<br>하라","hávi<br>하위","háva<br>하와","háu<br>하우","hærri<br>헤리","hærra<br>헤라","hæsti<br>헤스티","hæsta<br>헤스타","hæstu<br>헤스투"];
+const csv_01019 = ["harðr_a","harðr","a","","","하르드르","<small>(촉감이)</small> 단단한<br>어려운, 심각한","hard to the touch<br>hard, stern, severe","","<em>harðstjóri</em> <small class=\"IPA\">[하르드스툐리]</small> 가혹하게 다스리는 자. 폭군.","harðr<br>하르드르","hörð<br>호르드","hart<br>하르트","harðs<br>하르드스","harðrar<br>하르드라르","harðs<br>하르드스","harðir<br>하르디르","harðar<br>하르다르","hörð<br>호르드","harðra<br>하르드라","harði<br>하르디","harða<br>하르다","hörðu<br>호르두","harðari<br>하르다리","harðara<br>하르다라","harðasti<br>하르다스티","harðasta<br>하르다스타","hörðustu<br>호르두스투"];
+const csv_01086 = ["herr_m","herr","m","","","헤르","무리, 군중, 대중, 모임, 다수<br>군사, 군대, 병력, 부대","a host, people, multitude<br>an army, troops","","<em>allr herr</em> <small class=\"IPA\">[알르 헤르]</small> 모든 사람들.<br><em>Íslenzkr herr</em> <small class=\"IPA\">[이슬렌츠크르 헤르]</small> 아이슬란드 사람들.<br><em>einherjar</em> <small class=\"IPA\">[에인헤랴르]</small> 선택받은 무리. 발할라의 전사들.","herr<br>헤르","herjar<br>헤랴르","herjar<br>헤랴르","herja<br>헤랴","herinn<br>헤린","herjarins<br>헤랴린스","herjarnir<br>헤랴르니르","herjanna<br>헤랸나","","","","","","","","","",""];
+const csv_01087 = ["herra_m","herra","m","","","헤라","주인, 주군, 군주","a lord, master","","<em>yðarr herradómr</em> <small class=\"IPA\">[위다르 헤라돔르]</small> 각하, 나리.","herra<br>헤라","herra<br>헤라","herrar<br>헤라르","herra<br>헤라","herrann<br>헤란","herrans<br>헤란스","herrarnir<br>헤라르니르","herranna<br>헤란나","","","","","","","","","",""];
+const csv_01088 = ["hersir_m","hersir","m","","","헤르시르","지배자, 지도자, 군주","a chief, lord","","","hersir<br>헤르시르","hersis<br>헤르시스","hersar<br>헤르사르","hersa<br>헤르사","hersirinn<br>헤르시린","hersisins<br>헤르시신스","hersarnir<br>헤르사르니르","hersanna<br>헤르산나","","","","","","","","","",""];
+const csv_01104 = ["hildr_f","hildr","f","","","힐드르","<small>(주로 시에서)</small> 싸움, 전투, 전쟁","<small>(poetry)</small> battle, war","","<em>vekja hildi</em> <small class=\"IPA\">[웨캬 힐디]</small> 전쟁을 일으키다.<br><em>hefja hildi</em> <small class=\"IPA\">[헤뱌 힐디]</small> 전쟁을 시작하다.<br><em>hörð hildr</em> <small class=\"IPA\">[호르드 힐드르]</small> 거친 싸움.<br><em>hildimeiðr</em> <small class=\"IPA\">[힐디메이드르]</small> 싸움의 기둥. 전사.<br><em>Hilditannr</em> <small class=\"IPA\">[힐디탄르]</small> 싸움 이빨. 옛 덴마크 왕의 별명.<br><em>Hildisvíni</em> <small class=\"IPA\">[힐디스위니]</small> 싸움 돼지. 프레이야<small>(Freyja)</small>가 기르는 돼지들.","hildr<br>힐드르","hildar<br>힐다르","hildir<br>힐디르","hilda<br>힐다","hildrin<br>힐드린","hildarinnar<br>힐다린나르","hildirnar<br>힐디르나르","hildanna<br>힐단나","","","","","","","","","",""];
+const csv_01106 = ["himinn_m","himinn","m","","","히민","하늘, 천상","heaven","","<em>himnaríki</em> <small class=\"IPA\">[힘나리키]</small> 하늘 왕국.<br><em>himinbúi</em> <small class=\"IPA\">[히민부이]</small> 천상의 거주자. 천사.<br><em>Himinbjörg</em> <small class=\"IPA\">[히민뵤르그]</small> 하늘 성. 헤임달의 집.","himinn<br>히민","himins<br>히민스","himnar<br>힘나르","himna<br>힘나","himinninn<br>히민닌","himinsins<br>히민신스","himnarnir<br>힘나르니르","himnanna<br>힘난나","","","","","","","","","",""];
+const csv_01329 = ["jöfurr_m","jöfurr","m","","","요부르","왕, 전사","a king, warrior","본래 멧돼지를 뜻하는 말이었다. 왕과 전사가 전장에서 멧돼지 가죽을 뒤집어쓴 데에 착안하여 뜻이 바뀌었다고 여겨진다.","","jöfurr<br>요부르","jöfurs<br>요부르스","jöfrar<br>요브라르","jöfra<br>요브라","jöfurrinn<br>요부린","jöfursins<br>요부르신스","jöfrarnir<br>요브라르니르","jöfranna<br>요브란나","","","","","","","","","",""];
+const csv_01330 = ["jökull_m","jökull","m","","","요쿨","고드름","an icicle","","<em>böðvarjökull</em> <small class=\"IPA\">[보드와르요쿨]</small> 전쟁의 고드름. 검.<br><em>jökulsprunga</em> <small class=\"IPA\">[요쿨스프룽가]</small> 빙하의 틈. 크레바스.<br><em>Jökulsá</em> <small class=\"IPA\">[요쿨사]</small> 고드름 강.","jökull<br>요쿨","jökuls<br>요쿨스","jöklar<br>요클라르","jökla<br>요클라","jökullinn<br>요쿨린","jökulsins<br>요쿨신스","jöklarnir<br>요클라르니르","jöklanna<br>요클란나","","","","","","","","","",""];
+const csv_01331 = ["jól_n","jól","n","","","욜","율, 성탄절<br>잔치, 연회, 성찬","Yule<br>a feast","게르만족 공통의 대축제인 율<small>(Yule)</small>을 가리키는 말이다. 후대에 기독교가 유입되며 율은 비슷한 시기에 있던 성탄절로 대체되었다.","<em>hugins jól</em> <small class=\"IPA\">[후긴스 욜]</small> 까마귀의 축제.<br><em>Jólaaptan</em> <small class=\"IPA\">[욜라아프탄]</small> 율 전야. 크리스마스 이브.","-<br>-","-<br>-","jól<br>욜","jóla<br>욜라","-<br>-","-<br>-","jólin<br>욜린","jólanna<br>욜란나","","","","","","","","","",""];
+const csv_01332 = ["jörð_f","jörð","f","","","요르드","땅, 대지, 토지","the earth, land, an estate","영단어 earth와 어원을 함께한다.","<em>jarðarmegin</em> <small class=\"IPA\">[야르다르메긴]</small> 땅의 힘. 신의 권능.<br><em>jarðfé</em> <small class=\"IPA\">[야르드베]</small> 땅 속에 묻힌 보물.<br><em>jarðhiti</em> <small class=\"IPA\">[야르드히티]</small> 땅의 열. 지열, 화산열.","jörð<br>요르드","jarðar<br>야르다르","jarðir<br>야르디르","jarða<br>야르다","jörðin<br>요르딘","jarðarinnar<br>야르다린나르","jarðirnar<br>야르디르나르","jarðanna<br>야르단나","","","","","","","","","",""];
+const csv_01335 = ["jötunn_m","jötunn","m","","","요툰","거인, 요툰","a giant, Ettin","일반적으로 “서리거인”이라고 옮기지만, 서리거인<small>(hrímþurs)</small>은 요툰의 일부에 불과하다. 요툰은 모든 종류의 괴력난신을 가리키는 말로, 흐룽니르, 수르트와 같은 거인은 물론 펜리르, 요르문간드와 같은 괴수도 요툰이며, 로키, 스카디와 같은 신족 일부도 요툰에 속한다.","<em>Jötunheimr</em> <small class=\"IPA\">[요툰헤임르]</small> 거인의 땅, 요툰헤임.<br><em>jötunmóðr</em> <small class=\"IPA\">[요툰모드르]</small> 거인의 격노. 베르세르크를 가리키는 말들 중 하나.<br><em>orð jötna</em> <small class=\"IPA\">[요르드 요트나]</small> 거인의 언어. 황금.<br><em>jötnabani</em> <small class=\"IPA\">[요트나바니]</small> 거인을 죽이는 자. 토르.","jötunn<br>요툰","jötuns<br>요툰스","jötnar<br>요트나르","jötna<br>요트나","jötunninn<br>요툰닌","jötunsins<br>요툰신스","jötnarnir<br>요트나르니르","jötnanna<br>요트난나","","","","","","","","","",""];
+const csv_01461 = ["kona_f","kona","f","","","코나","여자, 여성<br>아내","a woman<br>a wife","영단어 queen과 어원을 함께한다.","<em>álfkona</em> <small class=\"IPA\">[알브코나]</small> 요정 여왕.","kona<br>코나","konu<br>코누","konur<br>코누르","kvenna<br>크웬나","konan<br>코난","konunnar<br>코눈나르","konurnar<br>코누르나르","kvennanna<br>크웬난나","","","","","","","","","",""];
+const csv_01465 = ["konungakyn_n","konungakyn","n","","","코눙가퀸","왕족, 왕가","royal kin, royalty","","","konungakyn<br>코눙가퀸","konungakyns<br>코눙가퀸스","konungakyn<br>코눙가퀸","konungakynja<br>코눙가퀴냐","konungakynit<br>코눙가퀴니트","konungakynsins<br>코눙가퀸신스","konungakynin<br>코눙가퀴닌","konungakynjanna<br>코눙가퀴냔나","","","","","","","","","",""];
+const csv_01466 = ["konungr_m","konungr","m","","","코눙그르","왕, 국왕, 통치자, 지배자, 군주","a king","kongr라고도 한다.","<em>Girkjakonungr</em> <small class=\"IPA\">[기르캬코눙그르]</small> 그리스의 왕. 콘스탄티노폴리스, 즉 동로마 제국의 황제.<br><em>konungslykill</em> <small class=\"IPA\">[코눙그슬뤼킬]</small> 왕의 열쇠. <small>(모든 상자와 문을 열 수 있으므로)</small> 도끼.<br><em>konungsefni</em> <small class=\"IPA\">[코눙그세브니]</small> 왕의 후계자. 책봉받은 세자 또는 태자.<br><em>konungsorð</em> <small class=\"IPA\">[코눙그소르드]</small> 왕의 말. 왕명.","konungr<br>코눙그르","konungs<br>코눙그스","konungar<br>코눙가르","konunga<br>코눙가","konungrinn<br>코눙그린","konungsins<br>코눙그신스","konungarnir<br>코눙가르니르","konunganna<br>코눙간나","","","","","","","","","",""];
+const csv_01467 = ["konungríki_n","konungríki","n","","","코눙그리키","왕국","a kingdom","","","konungríki<br>코눙그리키","konungríkis<br>코눙그리키스","konungríki<br>코눙그리키","konungríkja<br>코눙그리캬","konungríkit<br>코눙그리키트","konungríkisins<br>코눙그리키신스","konungríkin<br>코눙그리킨","konungríkjanna<br>코눙그리캰나","","","","","","","","","",""];
+const csv_01469 = ["konungsdóttir_f","konungsdóttir","f","","","코눙그스도티르","공주, 왕녀","a king's daughter, princess","","","konungsdóttir<br>코눙그스도티르","konungsdóttur<br>코눙그스도투르","konungsdœtr<br>코눙그스되트르","konungsdœtra<br>코눙그스되트라","konungsdóttirin<br>코눙그스도티린","konungsdótturinnar<br>코눙그스도투린나르","konungsdœtrnar<br>코눙그스되트르나르","konungsdœtranna<br>코눙그스되트란나","","","","","","","","","",""];
+const csv_01567 = ["land_n","land","n","","","란드","땅, 대지<br>나라, 국가","land<br>a country","","<em>Upplönd</em> <small class=\"IPA\">[우플론드]</small> 윗땅, 내륙. 오늘날 노르웨이의 오플란<small>(Oppland)</small> 주.<br><em>landahringr</em> <small class=\"IPA\">[란다흐링그르]</small> 땅의 고리. 바다.<br><em>landgarðr</em> <small class=\"IPA\">[란드가르드르]</small> 땅의 울타리. 바다.<br><em>landálfr</em> <small class=\"IPA\">[란달브르]</small> 땅의 요정. 왕.<br><em>landreki</em> <small class=\"IPA\">[란드레키]</small> 땅을 지키는 자. 왕.<br><em>landaleit</em> <small class=\"IPA\">[란달레이트]</small> 새로운 땅을 찾아 떠나는 모험.<br><em>landskostr</em> <small class=\"IPA\">[란드스코스트르]</small> 선택받은 땅.","land<br>란드","lands<br>란드스","lönd<br>론드","landa<br>란다","landit<br>란디트","landsins<br>란드신스","löndin<br>론딘","landanna<br>란단나","","","","","","","","","",""];
+const csv_01568 = ["landskjálfti_m","landskjálfti","m","","","란드스캴브티","지진, 땅울림","an earthquake","","","landskjálfti<br>란드스캴브티","landskjálfta<br>란드스캴브타","landskjálftar<br>란드스캴브타르","landskjálfta<br>란드스캴브타","landskjálftinn<br>란드스캴브틴","landskjálftans<br>란드스캴브탄스","landskjálftarnir<br>란드스캴브타르니르","landskjálftanna<br>란드스캴브탄나","","","","","","","","","",""];
+const csv_01635 = ["lið_n","lið","n","","","리드","군중, 무리, 사람들, 떼<br>가족, 가정, 식구<br>병력, 군대, 부대","a host, folk, people<br>a family, household<br>a troop, herd","","<em>Dvalins lið</em> <small class=\"IPA\">[드왈린스 리드]</small> 드발린의 무리. 난쟁이.<br><em>samna liði</em> <small class=\"IPA\">[삼나 리디]</small> 군대를 모으다.","lið<br>리드","liðs<br>리드스","lið<br>리드","liða<br>리다","liðit<br>리디트","liðsins<br>리드신스","liðin<br>리딘","liðanna<br>리단나","","","","","","","","","",""];
+const csv_01741 = ["margr_a","margr","a","","","마르그르","많은, 다수의<br>친절한, 친근한, 말을 잘 하는","many<br><small>(metaph.)</small> friendly, communicative","","<em>margkunnindi</em> <small class=\"IPA\">[마르그쿤닌디]</small> 많은 지식. 요술과 마법.","margr<br>마르그르","mörg<br>모르그","margt<br>마르흐트","margs<br>마르흐스","margrar<br>마르그라르","margs<br>마르흐스","margir<br>마르기르","margar<br>마르가르","mörg<br>모르그","margra<br>마르그라","margi<br>마르기","marga<br>마르가","mörgu<br>모르구","fleiri<br>플레이리","fleira<br>플레이라","flestari<br>플레스타리","flestara<br>플레스타라","flesturu<br>플레스투루"];
+const csv_01708 = ["maðr_m","maðr","m","","","마드르","사람, 남자, 남성<br>남편<br>룬 문자 ᛗ 또는 ᛘ.","a man<br>a husband<br>the m-rune","매우 많은 단어의 뒤에 붙어 “~을 하는 사람”의 뜻을 가지는 명사를 만든다. 영어의 man과 같이 일반적으로는 남성을 칭하지만, 여성을 포함하여 “사람”을 가리킬 수도 있다.","<em>Sigurðarmenn</em> <small class=\"IPA\">[시구르다르멘]</small> 시구르드의 사람들<small>(추종자)</small>.<br><em>Mannheimr</em> <small class=\"IPA\">[만헤임르]</small> 사람의 땅. 우리의 세상.<br><em>mannaþengill</em> <small class=\"IPA\">[만나셍길]</small> 사람들의 왕. 뇨르드.<br><em>maðr eptir mann</em> <small class=\"IPA\">[마드르 에프티르 만]</small> 사람 뒤에 사람. 잇달아, 끊임없이.<br><em>manneldi</em> <small class=\"IPA\">[만넬디]</small> 사람의 불꽃. 식량, 먹거리.<br><em>mannhundr</em> <small class=\"IPA\">[만훈드르]</small> 인간 개. 개자식, 악당.","maðr<br>마드르","manns<br>만스","menn<br>멘","manna<br>만나","maðrinn<br>마드린","mannsins<br>만신스","mennirnir<br>멘니르니르","mannanna<br>만난나","","","","","","","","","",""];
+const csv_01749 = ["mega_v","mega","v","","","메가","가능하다, 충분한 힘을 가지다<br>건강하다, 건장하다, 안녕하다","to have strength to do, avail<br>to be well","분사형인 megandi는 “강력한, 권능 있는” 따위의 뜻으로 쓰인다.","","mega<br>메가","megandi<br>메간디","meganda<br>메간다","","","","","","","","","","","","","","",""];
+const csv_01750 = ["megin_n","megin","n","","","메긴","힘, 권능, 권세, 위력<br>주된 것, 주요한 것","might, main, strength<br>the main, chief part of a thing","","<em>allt megin landsins</em> <small class=\"IPA\">[알트 메긴 란드신스]</small> 본토, 주된 땅.<br><em>vetrarmegin</em> <small class=\"IPA\">[웨트라르메긴]</small> 겨울의 본모습. 한겨울.<br><em>megin árinnar</em> <small class=\"IPA\">[메긴 아린나르]</small> 주류, 강의 본류.<br><em>megindróttning</em> <small class=\"IPA\">[메긴드로트닝그]</small> 위대한 여왕, 성모 마리아.<br><em>megingjörð</em> <small class=\"IPA\">[메긴교르드]</small> 힘의 허리띠<small>(girdle)</small>, 토르의 힘을 두 배로 강하게 해 주는 보구.<br><em>megindýrr</em> <small class=\"IPA\">[메긴뒤르]</small> 몹시 사랑하는 사람을 부르는 호칭.<br><em>meginhyggja</em> <small class=\"IPA\">[메긴휘갸]</small> 크나큰 지혜.","megin<br>메긴","megins<br>메긴스","-<br>-","-<br>-","megnit<br>메그니트","meginsins<br>메긴신스","-<br>-","-<br>-","","","","","","","","","",""];
+const csv_01751 = ["meginramr_a","meginramr","a","","","메긴람르","매우 힘이 센, 괴력의","very strong","","","meginramr<br>메긴람르","meginröm<br>메긴롬","meginramt<br>메긴람트","meginrams<br>메긴람스","meginramrar<br>메긴람라르","meginrams<br>메긴람스","meginramir<br>메긴라미르","meginramar<br>메긴라마르","meginröm<br>메긴롬","meginramra<br>메긴람라","meginrami<br>메긴라미","meginrama<br>메긴라마","meginrömu<br>메긴로무","meginramari<br>메긴라마리","meginramara<br>메긴라마라","meginramasti<br>메긴라마스티","meginramasta<br>메긴라마스타","meginrömustu<br>메긴로무스투"];
+const csv_01752 = ["megintírr_m","megintírr","m","","","메긴티르","영광, 영예, 명성","main-fame, glory","","","megintírr<br>메긴티르","megintírs<br>메긴티르스","-<br>-","-<br>-","megintírrinn<br>메긴티린","megintírsins<br>메긴티르신스","-<br>-","-<br>-","","","","","","","","","",""];
+const csv_01712 = ["mæli_n","mæli","n","","","멜리","발음, 목소리, 어기, 어조","the pronunciation, voice, intonation","","","mæli<br>멜리","mælis<br>멜리스","mæli<br>멜리","mæla<br>멜라","mælit<br>멜리트","mælisins<br>멜리신스","mælin<br>멜린","mælanna<br>멜란나","","","","","","","","","",""];
+const csv_01713 = ["mær_f","mær","f","","","메르","소녀, 미혼의 여성, 처녀<br><small>(시어)</small> 딸","a maid, girl, virgin<br>a daughter","mey라고도 한다.","<em>mær meyja</em> <small class=\"IPA\">[메르 메위야]</small> 처녀 중의 처녀. 성모 마리아.","mær<br>메르","meyjar<br>메위야르","meyjar<br>메위야르","meyja<br>메위야","mærin<br>메린","meyjarinnar<br>메위야린나르","meyjarnar<br>메위야르나르","meyjanna<br>메위얀나","","","","","","","","","",""];
+const csv_01714 = ["mærr_a","mærr","a","","","메르","영광스러운, 영예로운, 명예로운, 위대한","famous, glorious, great","","","mærr<br>메르","mær<br>메르","mært<br>메르트","mærs<br>메르스","mærrar<br>메라르","mærs<br>메르스","mærir<br>메리르","mærar<br>메라르","mær<br>메르","mærra<br>메라","mæri<br>메리","mæra<br>메라","mæru<br>메루","mærari<br>메라리","mærara<br>메라라","mærasti<br>메라스티","mærasta<br>메라스타","mærustu<br>메루스투"];
+const csv_01834 = ["nafn_n","nafn","n","","","나븐","이름","a name","namn이라고도 한다.","","nafn<br>나븐","nafns<br>나븐스","nöfn<br>노븐","nafna<br>나브나","nafnit<br>나브니트","nafnsins<br>나븐신스","nöfnin<br>노브닌","nafnanna<br>나브난나","","","","","","","","","",""];
+const csv_01835 = ["nagl_m","nagl","m","","","나글","손톱, 발톱","the nail","","<em>Naglfar</em> <small class=\"IPA\">[나글바르]</small> 손톱 여행자, 나글파르. 죽은 자의 손발톱을 모아 만든 거대한 전함으로, 라그나로크가 도래하면 망자와 거인의 군대를 싣고 저승에서 올라온다고 한다. «신 에다»에서는 나글파르의 건조를 최대한 늦추기 위하여 망자의 손발톱을 모두 깎는다고<small>(혹은 뽑는다고)</small> 말한다.","nagl<br>나글","nagls<br>나글스","negl<br>네글","nagla<br>나글라","naglinn<br>나글린","naglsins<br>나글신스","neglinir<br>네글리니르","naglanna<br>나글란나","","","","","","","","","",""];
+const csv_01868 = ["nótt_f","nótt","f","","","노트","밤, 야간","the night","nátt라고도 한다.","<em>nótt ina helgu</em> <small class=\"IPA\">[노트 이나 헬구]</small> 거룩한 밤. 성탄절 밤.<br><em>Náttsól</em> <small class=\"IPA\">[나트솔]</small> 한밤중의 태양. 널리 쓰이는 별명. 여성의 이름으로도 쓰인다.<br><em>nætrelding</em> <small class=\"IPA\">[네트렐딩그]</small> 밤의 끝. 새벽, 여명.<br><em>náttdögg</em> <small class=\"IPA\">[나트도그]</small> 밤 이슬.<br><em>náttmyrkr</em> <small class=\"IPA\">[나트뮈르크르]</small> 밤의 어둠.","nótt<br>노트","nætr<br>네트르","nætr<br>네트르","nátta<br>나타","nóttin<br>노틴","nætrinnar<br>네트린나르","nætrnar<br>네트르나르","náttanna<br>나탄나","","","","","","","","","",""];
+const csv_01911 = ["opinn_a","opinn","a","","","오핀","열린","open","","<em>opin á</em> <small class=\"IPA\">[오핀 아]</small> 열린 강. 얼음에 막히지 않아 배를 타고 나아갈 수 있는 강.<br><em>Hurðin er opinn.</em> <small class=\"IPA\">[후르딘 에르 오핀]</small> 문이 열렸다.","opinn<br>오핀","opin<br>오핀","opit<br>오피트","opins<br>오핀스","opinnar<br>오핀나르","opins<br>오핀스","opnir<br>오프니르","opnar<br>오프나르","opin<br>오핀","opinna<br>오핀나","opni<br>오프니","opna<br>오프나","opnu<br>오프누","opnari<br>오프나리","opnara<br>오프나라","opnasti<br>오프나스티","opnasta<br>오프나스타","opnustu<br>오프누스투"];
+const csv_01913 = ["opna_v","opna","v","","","오프나","열다, 개방하다","to open","","","opna<br>오프나","opnandi<br>오프난디","opnanda<br>오프난다","","","","","","","","","","","","","","",""];
+const csv_01890 = ["ógn_f","ógn","f","","","오근","공포, 두려움<br>위협, 위험","dread, terror<br>menaces, threats","","<em>ógnardómr</em> <small class=\"IPA\">[오그나르돔르]</small> 공포의 심판.","ógn<br>오근","ógnar<br>오그나르","ógnir<br>오그니르","ógna<br>오그나","ógnin<br>오그닌","ógnarinnar<br>오그나린나르","ógnirnar<br>오그니르나르","ógnanna<br>오그난나","","","","","","","","","",""];
+const csv_01891 = ["ógna_v","ógna","v","","","오그나","위협하다, 놀래키다","to threaten","","","ógna<br>오그나","ógnandi<br>오그난디","ógnanda<br>오그난다","","","","","","","","","","","","","","",""];
+const csv_01892 = ["ógnarhlutr_m","ógnarhlutr","m","","","오그나르흘루트르","악령","a dire apparition","","","ógnarhlutr<br>오그나르흘루트르","ógnarhluts<br>오그나르흘루트스","ógnarhlutar<br>오그나르흘루타르","ógnarhluta<br>오그나르흘루타","ógnarhlutrinn<br>오그나르흘루트린","ógnarhlutsins<br>오그나르흘루트신스","ógnarhlutarnir<br>오그나르흘루타르니르","ógnarhlutanna<br>오그나르흘루탄나","","","","","","","","","",""];
+const csv_01898 = ["öl_n","öl","n","","","올","술, 맥주, 에일<br>술잔치, 주연, 잔치, 연회, 성찬","ale<br>a drinking-bout, banquet","","<em>ölbúð</em> <small class=\"IPA\">[올부드]</small> 맥주집<small>(ale-booth)</small>.<br><em>ölgörð</em> <small class=\"IPA\">[올고르드]</small> 술 빚기, 조주, 양조.","öl<br>올","öls<br>올스","öl<br>올","öla<br>올라","ölit<br>올리트","ölsins<br>올신스","ölin<br>올린","ölanna<br>올란나","","","","","","","","","",""];
+const csv_01905 = ["önd_f","önd","f","","","온드","숨, 숨결, 입김, 호흡<br><small>(기독교)</small> 영, 영혼","the breath<br>the soul","","<em>andardauði</em> <small class=\"IPA\">[안다르다우디]</small> 영적 죽음.<br><em>andarsár</em> <small class=\"IPA\">[안다르사르]</small> 마음의 상처.","önd<br>온드","andar<br>안다르","andir<br>안디르","anda<br>안다","öndin<br>온딘","andarinnar<br>안다린나르","andirnar<br>안디르나르","andanna<br>안단나","","","","","","","","","",""];
+const csv_01960 = ["penningr_m","penningr","m","","","펜닝그르","동전, 주화<br><small>(복수)</small> 돈","a penny, coin<br>money","","","penningr<br>펜닝그르","pennings<br>펜닝그스","penningar<br>펜닝가르","penninga<br>펜닝가","penningrinn<br>펜닝그린","penningsins<br>펜닝그신스","penningarnir<br>펜닝가르니르","penninganna<br>펜닝간나","","","","","","","","","",""];
+const csv_01970 = ["prúðr_a","prúðr","a","","","프루드르","우아한, 세련된, 기품 있는, 아름다운, 장대한, 위풍당당한<br>용감한, 용맹한, 용기 있는","fine, magnificent, stately<br>gallant, brave","","","prúðr<br>프루드르","prúð<br>프루드","prútt<br>프루트","prúðs<br>프루드스","prúðrar<br>프루드라르","prúðs<br>프루드스","prúðir<br>프루디르","prúðar<br>프루다르","prúð<br>프루드","prúðra<br>프루드라","prúði<br>프루디","prúða<br>프루다","prúðu<br>프루두","prúðari<br>프루다리","prúðara<br>프루다라","prúðasti<br>프루다스티","prúðasta<br>프루다스타","prúðustu<br>프루두스투"];
+const csv_01971 = ["prýði_f","prýði","f","","","프뤼디","장식, 장식물, 장신구<br>용맹, 용기, 무공","an ornament<br>gallantry, bravery","","","prýði<br>프뤼디","prýði<br>프뤼디","-<br>-","-<br>-","prýðin<br>프뤼딘","prýðinnar<br>프뤼딘나르","-<br>-","-<br>-","","","","","","","","","",""];
+const csv_02001 = ["rann_n","rann","n","","","란","<small>(시어)</small> 집","a house","","<em>éla rann</em> <small class=\"IPA\">[엘라 란]</small> 폭풍의 집. 하늘.<br><em>skýrann</em> <small class=\"IPA\">[스퀴란]</small> 구름의 집. 하늘.<br><em>óðar rann</em> <small class=\"IPA\">[오다르 란]</small> 정신의 집. 가슴.<br><em>hvalrann</em> <small class=\"IPA\">[흐왈란]</small> 고래의 집. 바다.<br><em>dvergrann</em> <small class=\"IPA\">[드웨르그란]</small> 난쟁이의 집. 바위.","rann<br>란","ranns<br>란스","rönn<br>론","ranna<br>란나","rannit<br>란니트","rannsins<br>란신스","rönnin<br>론닌","rannanna<br>란난나","","","","","","","","","",""];
+const csv_02013 = ["rauðr_a","rauðr","a","","","라우드르","붉은, 빨간, 적색의<br><small>(비유)</small> 피의, 유혈의, 사나운, 흉폭한, 주요한, 큰","red<br><small>(metaph.)</small> bloody. fierce, arch","","<em>rauðkembingr</em> <small class=\"IPA\">[라우드켐빙그르]</small> 붉은 고래. 아이슬란드 전설 속의 고래와 비슷한 거대한 바다 괴물. 피에 굶주려 엄청난 속도로 배로 달려들어 들이받아 난파시키고 선원들을 잡아먹는다고 한다.<br><em>rauðavíkingr</em> <small class=\"IPA\">[라우다위킹그르]</small> 붉은 바이킹. 대해적.","rauðr<br>라우드르","rauð<br>라우드","rautt<br>라우트","rauðs<br>라우드스","rauðrar<br>라우드라르","rauðs<br>라우드스","rauðir<br>라우디르","rauðar<br>라우다르","rauð<br>라우드","rauðra<br>라우드라","rauði<br>라우디","rauða<br>라우다","rauðu<br>라우두","rauðari<br>라우다리","rauðara<br>라우다라","rauðasti<br>라우다스티","rauðasta<br>라우다스타","rauðustu<br>라우두스투"];
+const csv_02015 = ["raup_n","raup","n","","","라우프","자랑, 과시, 으스댐","a boasting","","<em>karlaraup</em> <small class=\"IPA\">[카를라라우프]</small> 노인의 자랑. 자신이 젊을 때 겪은 역경과 좋아진 오늘날의 차이를 설명하며 젊은이에게 으스대는 일.","raup<br>라우프","raups<br>라우프스","raup<br>라우프","raupa<br>라우파","raupit<br>라우피트","raupsins<br>라우프신스","raupin<br>라우핀","raupanna<br>라우판나","","","","","","","","","",""];
+const csv_02071 = ["risi_m","risi","m","","","리시","거인","a giant","거인을 가리키는 세 단어, risi, jötunn, þurs는 각각 거인의 다른 면모를 부각하는 말이다. risi는 덩치를, jötunn은 힘을, þurs는 무식함을 상징한다. 아래 예문이 이러한 인식을 나타낸다.","<em>Hár sem risi, sterkr sem jötunn, heimskr sem þurs.</em> <small class=\"IPA\">[하르 셈 리시, 스테르크르 셈 요툰, 헤임스크르 셈 수르스]</small> 리시처럼 커다랗고, 요툰처럼 힘세고, 투르스처럼 무식하다.","risi<br>리시","risa<br>리사","risar<br>리사르","risa<br>리사","risinn<br>리신","risans<br>리산스","risarnir<br>리사르니르","risanna<br>리산나","","","","","","","","","",""];
+const csv_02121 = ["saga_f","saga","f","","","사가","이야기, 전승, 전설, 구전, 설화, 일대기, 역사","a story, tale, legend, history","","<em>fornaldarsaga</em> <small class=\"IPA\">[포르날다르사가]</small> 옛 시대의 이야기. 전설 사가.<br><em>lesa sögu</em> <small class=\"IPA\">[레사 소구]</small> 이야기를 읽다.","saga<br>사가","sögu<br>소구","sögur<br>소구르","sagna<br>사그나","sagan<br>사간","sögunnar<br>소군나르","sögurnar<br>소구르나르","sagnanna<br>사그난나","","","","","","","","","",""];
+const csv_02127 = ["sála_f","sála","f","","","살라","영혼, 혼령, 마음, 정신","the soul","","<em>sálueldar</em> <small class=\"IPA\">[살루엘다르]</small> 영혼의 불꽃. 장례식에서 타오르는 불길.<br><em>sáluskaði</em> <small class=\"IPA\">[살루스카디]</small> 영혼의 고통. 영원한 형벌, 무간지옥.<br><em>sálumessa</em> <small class=\"IPA\">[살루메사]</small> 영혼의 예배. 장송곡.","sála<br>살라","sálu<br>살루","sálur<br>살루르","sálna<br>살나","sálan<br>살란","sálunnar<br>살룬나르","sálurnar<br>살루르나르","sálnanna<br>살난나","","","","","","","","","",""];
+const csv_02131 = ["salr_m","salr","m","","","살르","회당, 전당, 홀","a saloon, hall","","<em>Uppsalir</em> <small class=\"IPA\">[우프살리르]</small> 높은 전당. 오늘날 스웨덴의 웁살라<small>(Uppsala)</small>.<br><em>hjartasalr</em> <small class=\"IPA\">[햐르타살르]</small> 심장의 전당. 가슴.<br><em>dæmisalr</em> <small class=\"IPA\">[데미살르]</small> 말의 전당. 입.<br><em>drjúpansalr</em> <small class=\"IPA\">[드류판살르]</small> 물 떨어지는 전당. 비 오는 하늘.<br><em>dökksalr</em> <small class=\"IPA\">[도크살르]</small> 어둠의 전당. 바다.","salr<br>살르","salar<br>살라르","salir<br>살리르","sala<br>살라","salrinn<br>살린","salarins<br>살라린스","salirnir<br>살리르니르","salanna<br>살란나","","","","","","","","","",""];
+const csv_02180 = ["senna1_f","senna","f","1","","센나","말다툼, 말싸움, 언쟁, 격론, 시비, 모욕","high words, gibing, flyting","노르드인과 앵글로색슨인, 게일인 등의 옛 관습이자 놀이이기도 하다. 검 대신 혀로써 싸우는 일이며, 경우에 따라 검으로 하는 결투를 대체하기도 했다. 참가자는 상대를 패륜, 음담패설, 허위와 중상모략 등 모든 수단을 동원하여 모욕하되 운율에 맞추어 아름답게 노래하듯 하여야 했으며, 말문이 막히거나 서투른 시를 지어 어설프게 공격한 사람이 패배하였다. 이 싸움에서 이긴 것은 힘을 겨루어 이긴 것과 마찬가지로 명예로운 것으로 여겨졌다.","<em>Lokasenna</em> <small class=\"IPA\">[로카센나]</small> «로키의 말다툼». 에기르의 술잔치에서 로키가 자리에 있던 모든 신을 모욕한 일.","senna<br>센나","sennu<br>센누","sennur<br>센누르","senna<br>센나","sennan<br>센난","sennunnar<br>센눈나르","sennurnar<br>센누르나르","sennanna<br>센난나","","","","","","","","","",""];
+const csv_02457 = ["sverð_n","sverð","n","","","스웨르드","칼, 검, 도검","a sword","병장기로서의 검을 뜻하는 일반적인 단어이다.","<em>bezta sverð</em> <small class=\"IPA\">[베츠타 스웨르드]</small> 가장 좋은 검. 가장 위대한 기사.<br><em>sverðálfr</em> <small class=\"IPA\">[스웨르달브르]</small> 검의 요정. 전사.<br><em>sverðleikr</em> <small class=\"IPA\">[스웨르들레이크르]</small> 검의 놀이. 싸움.","sverð<br>스웨르드","sverðs<br>스웨르드스","sverð<br>스웨르드","sverða<br>스웨르다","sverðit<br>스웨르디트","sverðsins<br>스웨르드신스","sverðin<br>스웨르딘","sverðanna<br>스웨르단나","","","","","","","","","",""];
+const csv_02459 = ["sverja_v","sverja","v","","","스웨랴","맹세하다, 맹서하다, 서약하다, 선서하다","to swear","","","sverja<br>스웨랴","sverjandi<br>스웨랸디","sverjanda<br>스웨랸다","","","","","","","","","","","","","","",""];
+const csv_02582 = ["troll_n","troll","n","","","트롤","트롤, 괴물","a troll","tröll이라고도 하나, 어원을 따지면 이는 옳지 않다.","<em>trollmarr</em> <small class=\"IPA\">[트롤마르]</small> 괴물 말. 늑대.","troll<br>트롤","trolls<br>트롤스","troll<br>트롤","trolla<br>트롤라","trollit<br>트롤리트","trollsins<br>트롤신스","trollin<br>트롤린","trollanna<br>트롤란나","","","","","","","","","",""];
+const csv_02583 = ["trú_f","trú","f","","","트루","믿음, 신앙, 종교적 신념","trust, belief, faith","trúa라고도 한다.","<em>Ásatrú*</em> <small class=\"IPA\">[아사트루]</small> 아스 신족을 향한 믿음. 근현대 노르드권의 신이교주의를 뜻한다.","trú<br>트루","trúar<br>트루아르","trúr<br>트루르","trúa<br>트루아","trúin<br>트루인","trúarinnar<br>트루아린나르","trúrnar<br>트루르나르","trúnna<br>트룬나","","","","","","","","","",""];
+const csv_02597 = ["týr_m","týr","m","","","튀르","<small>(시어)</small> 신, 신격<br>아스 신 튀르의 이름<br>룬 문자 ᛏ 또는 ᛐ","a god<br>the name of the god Týr<br>the t-rune","가설에 따르면, 오딘과 토르 이전에 본래 튀르가 지고신의 자리를 차지했다고 한다. 훗날에도 그의 이름이 신을 대변하는 시어로 남았다.","<em>Týsdagr</em> <small class=\"IPA\">[튀스다그르]</small> 튀르의 날. 화요일.<br><em>Týsáttungr</em> <small class=\"IPA\">[튀사퉁그르]</small> 신의 후예.","týr<br>튀르","týs<br>튀스","tívar<br>티와르","tíva<br>티와","týrinn<br>튀린","týsins<br>튀신스","tívarnir<br>티와르니르","tívanna<br>티완나","","","","","","","","","",""];
+const csv_02616 = ["undr_n","undr","n","","","운드르","경이, 경외, 경탄, 불가사의","a wonder","","<em>Fróðárundr</em> <small class=\"IPA\">[프로다룬드르]</small> 프로다의 경이. 프로다는 아이슬란드의 한 폐가인데, «에이리 사람들의 사가<small>(Eyrbyggja Saga)</small>»에 따르면 마을 주민들이 역병으로 떼죽음을 당한 뒤 이 집에 매일같이 수많은 원령이 나타나 지나가는 사람들을 해쳤다. 군장은 이들을 산 사람처럼 재판에 넘겨 퇴치하였고, 마지막으로 기독교적 의식으로 집을 정화해 사태를 끝마쳤다고 한다.","undr<br>운드르","undrs<br>운드르스","undr<br>운드르","undra<br>운드라","undrit<br>운드리트","undrsins<br>운드르신스","undrin<br>운드린","undranna<br>운드란나","","","","","","","","","",""];
+const csv_02617 = ["undrligr_a","undrligr","a","","","운드를리그르","놀라운, 경이로운, 기이한","wonderful, strange","","","undrligr<br>운드를리그르","undrlig<br>운드를리그","undrligt<br>운드를리흐트","undrligs<br>운드를리흐스","undrligrar<br>운드를리그라르","undrligs<br>운드를리흐스","undrligir<br>운드를리기르","undrligar<br>운드를리가르","undrlig<br>운드를리그","undrligra<br>운드를리그라","undrligi<br>운드를리기","undrliga<br>운드를리가","undrligu<br>운드를리구","undrligari<br>운드를리가운드를리","undrligara<br>운드를리가라","undrligasti<br>운드를리가스티","undrligasta<br>운드를리가스타","undrligustu<br>운드를리구스투"];
+const csv_02607 = ["úlfr_m","úlfr","m","","","울브르","늑대","a wolf","노르드인은 늑대를 사납고 사악한 짐승으로 여겼다. 두 늑대 스콜과 하티는 태양과 달을 잡아먹기 위해 매일을 추격하고, 라그나로크에 이르러 마침내 성취한다. 주신 오딘의 생명을 끝장내는 것도 늑대 펜리르이다.","<em>Fæðisk úlfr í skógi.</em> <small class=\"IPA\">[페디스크 울브르 이 스코기]</small> 늑대는 숲에서 태어난다.<br><em>úlfvín</em> <small class=\"IPA\">[울브윈]</small> 늑대의 포도주. 피.<br><em>úlfgrennir</em> <small class=\"IPA\">[울브그렌니르]</small> 늑대를 먹이는 자. 전사.<br><em>Úlfsbági</em> <small class=\"IPA\">[울브스바기]</small> 늑대<small>(펜리르)</small>의 원수. 오딘.<br><em>Úlfsfaðir</em> <small class=\"IPA\">[울브스바디르]</small> 늑대<small>(펜리르)</small>의 아버지. 로키.","úlfr<br>울브르","úlfs<br>울브스","úlfar<br>울바르","úlfa<br>울바","úlfrinn<br>울브린","úlfsins<br>울브신스","úlfarnir<br>울바르니르","úlfanna<br>울반나","","","","","","","","","",""];
+const csv_02667 = ["vatn_n","vatn","n","","","와튼","물, 민물<br>호수, 못, 연못","water, fresh water<br>a lake","","<em>vatnsból</em> <small class=\"IPA\">[와튼스볼]</small> 마실 물이 나오는 자리. 우물.<br><em>vatnsíss</em> <small class=\"IPA\">[와튼시스]</small> 호수에 낀 얼음.","vatn<br>와튼","vatns<br>와튼스","vötn<br>워튼","vatna<br>와트나","vatnit<br>와트니트","vatnsins<br>와튼신스","vötnin<br>워트닌","vatnanna<br>와트난나","","","","","","","","","",""];
+const csv_02668 = ["vatnsfall_n","vatnsfall","n","","","와튼스발","폭포","a waterfall","","","vatnsfall<br>와튼스발","vatnsfalls<br>와튼스발스","vatnsföll<br>와튼스볼","vatnsfalla<br>와튼스발라","vatnsfallit<br>와튼스발리트","vatnsfallsins<br>와튼스발신스","vatnsföllin<br>와튼스볼린","vatnsfallanna<br>와튼스발란나","","","","","","","","","",""];
+const csv_02681 = ["vegr_m","vegr","m","","","웨그르","길, 도로<br>지역, 지방","a way, road<br>a region, county","","<em>Norðvegr</em> <small class=\"IPA\">[노르드웨그르]</small> 북쪽 땅. 노르드인의 땅. 오늘날의 노르웨이의 어원.<br><em>Suðrvegr</em> <small class=\"IPA\">[수드르웨그르]</small> 남쪽 땅. 오늘날의 독일 일대.<br><em>Austrvegr</em> <small class=\"IPA\">[아우스트르웨그르]</small> 동쪽 땅. 오늘날의 발트 일대.","vegr<br>웨그르","vegar<br>웨가르","vegir<br>웨기르","vega<br>웨가","vegrinn<br>웨그린","vegarins<br>웨가린스","vegirnir<br>웨기르니르","veganna<br>웨간나","","","","","","","","","",""];
+const csv_02724 = ["vili_m","vili","m","","","윌리","의지, 소망, 욕구, 욕망, 갈망, 바람<br>선한 의지, 선호, 기호, 호감<br><small>(옛 시어)</small> 기쁨, 즐거움, 만족<br>성적 욕구, 성욕, 욕정","will, wish, desire<br>good-will, liking, favour<br><small>(poetry)</small> delight, joy<br>carnal lust","","<em>at vilja gefin</em> <small class=\"IPA\">[아트 윌랴 게빈]</small> 행복하게 결혼하다.<br><em>vaðin at vilja</em> <small class=\"IPA\">[와딘 아트 윌랴]</small> 즐거움이 없다.","vili<br>윌리","vilja<br>윌랴","viljar<br>윌랴르","vilja<br>윌랴","vilinn<br>윌린","viljans<br>윌랸스","viljarnir<br>윌랴르나르","viljanna<br>윌랸나","","","","","","","","","",""];
+const csv_02725 = ["vilja_v","vilja","v","","","윌랴","바라다, 원하다, 희망하다, 소망하다<br>선호하다, 좋아하다","to wish, to will<br>to favour one","","<em>maðr er andask vill</em> <small class=\"IPA\">[마드르 에르 안다스크 윌]</small> 곧 죽을 사람.<br><em>vildi Aðalráðr hann ekki þar.</em> <small class=\"IPA\">[윌디 아달라드르 한 에키 사르]</small> 아달라드르는 그가 그곳에 있지 않기를 바랐다.","vilja<br>윌랴","viljandi<br>윌랸디","viljanda<br>윌랸다","","","","","","","","","","","","","","",""];
+const csv_02764 = ["yndi_n","yndi","n","","","윈디","주거, 쉼터<br>매혹, 매력, 기쁨, 즐거움","an abode<br>a charm, delight","","<em>Hvárki nam hann yndi á Íslandi né í Noregi.</em> <small class=\"IPA\">[흐와르키 남 한 윈디 아 이슬란디 네 이 노레기]</small> 그는 아이슬란드에서도 노르웨이에서도 쉴 곳을 찾을 수 없었다.","yndi<br>윈디","yndis<br>윈디스","yndi<br>윈디","ynda<br>윈다","yndit<br>윈디트","yndisins<br>윈디신스","yndin<br>윈딘","yndanna<br>윈단나","","","","","","","","","",""];
+const csv_02765 = ["ýr_m","ýr","m","","","위르","주목나무, 주목나무 목재<br><small>(비유)</small> 활<br>룬 문자 ᛦ","the yew-tree<br><small>(metaph.)</small> a bow<br>the z-rune","활을 주로 주목나무로 만들었기 때문에 이러한 비유가 생겼다.","<em>ýdróg</em> <small class=\"IPA\">[위드로그]</small> 활시위.<br><em>ýskelfir</em> <small class=\"IPA\">[위스켈비르]</small> 주목나무 휘두르는 자. 활잡이, 궁수.","ýr<br>위르","ýs<br>위스","-<br>-","-<br>-","ýrinn<br>위린","ýsins<br>위신스","-<br>-","-<br>-","","","","","","","","","",""];
+const csv_02503 = ["þjóð_f","þjóð","f","","","쇼드","사람들, 보통 사람들, 대중, 인민, 국민, 민족, 나라, 국가","a people, a nation","","<em>þjóð eru þrír tigir.</em> <small class=\"IPA\">[쇼드 에루 스리르 티기르]</small> 서른 사람이 모이면 대중이 된다.<br><em>Svíþjóð</em> <small class=\"IPA\">[스위쇼드]</small> 스웨덴.","þjóð<br>쇼드","þjóðar<br>쇼다르","þjóðir<br>쇼디르","þjóða<br>쇼다","þjóðin<br>쇼딘","þjóðarinnar<br>쇼다린나르","þjóðirnar<br>쇼디르나르","þjóðanna<br>쇼단나","","","","","","","","","",""];
+const csv_02504 = ["þjóðfáni_m","þjóðfáni","m","","*","쇼드바니","나라의 깃발, 국기","a national flag","","","þjóðfáni<br>쇼드바니","þjóðfána<br>쇼드바나","þjóðfánar<br>쇼드바나르","þjóðfána<br>쇼드바나","þjóðfáninn<br>쇼드바닌","þjóðfánans<br>쇼드바난스","þjóðfánarnir<br>쇼드바나르니르","þjóðfánanna<br>쇼드바난나","","","","","","","","","",""];
+const csv_00007 = ["æfinn_a","æfinn","a","","","에빈","영원한, 영구적인, 항구적인","everlasting","","","æfinn<br>에빈","æfin<br>에빈","æfit<br>에비트","æfins<br>에빈스","æfinnar<br>에빈나르","æfins<br>에빈스","æfnir<br>에브니르","æfnar<br>에브나르","æfin<br>에빈","æfinna<br>에빈나","æfni<br>에브니","æfna<br>에브나","æfnu<br>에브누","æfnari<br>에브나리","æfnara<br>에브나라","æfnasti<br>에브나스티","æfnasta<br>에브나스타","æfnustu<br>에브누스투"];
+const csv_00008 = ["æfintýr_n","æfintýr","n","","","에빈튀르","모험<br>이야기","an adventure<br>a tale, romantic tale","","","æfintýr<br>에빈튀르","æfintýrs<br>에빈튀르스","æfintýr<br>에빈튀르","æfintýra<br>에빈튀라","æfintýrit<br>에빈튀리트","æfintýrsins<br>에빈튀르신스","æfintýrin<br>에빈튀린","æfintýranna<br>에빈튀란나","","","","","","","","","",""];
+const csv_00009 = ["ægir_m","ægir","m","","","에기르","바다, 대양<br>거인 에기르의 이름","the sea, ocean, main<br>the giant Ægir","","<em>Ægisdætr</em> <small class=\"IPA\">[에기스데트르]</small> 에기르의 아홉 딸들. 파도와 바다의 이름들.<br><em>Ægisbróðir</em> <small class=\"IPA\">[에기스브로디르]</small> 에기르의 형제들. 바람, 불, 바다.","ægir<br>에기르","ægis<br>에기스","-<br>-","-<br>-","ægirinn<br>에기린","ægisins<br>에기신스","-<br>-","-<br>-","","","","","","","","","",""];
+
+
+
+// define dict
+var csv_non = [];
+
+const csv_sort = [45, 70, 101, 102, 208, 240, 434, 486, 487, 499, 508, 509, 510, 511, 569, 570, 571, 573, 583, 804, 805, 808, 919, 956, 899, 980, 981, 1017, 1018, 1019, 1086, 1087, 1088, 1104, 1106, 1329, 1330, 1331, 1332, 1335, 1461, 1465, 1466, 1467, 1469, 1567, 1568, 1635, 1741, 1708, 1749, 1750, 1751, 1752, 1712, 1713, 1714, 1834, 1835, 1868, 1911, 1913, 1890, 1891, 1892, 1898, 1905, 1960, 1970, 1971, 2001, 2013, 2015, 2071, 2121, 2127, 2131, 2180, 2457, 2459, 2582, 2583, 2597, 2616, 2617, 2607, 2667, 2668, 2681, 2724, 2725, 2764, 2765, 2503, 2504, 7, 8, 9];
+
+for (var i = 0; i < csv_sort.length; i ++) {
+	let numstring = String(csv_sort[i]).padStart(5, "0");
+	csv_non.push(eval("csv_" + numstring));
+}
+
+const dict = csv_non;
+
+// define regions
+const column = {
+		key: 0, //must be identical
+		title: 1,
+		class: 2,
+		tag_synonym: 3,
+		tag_modern: 4,
+		pronounce_ko: 5,
+		gloss_ko: 6,
+		gloss_en: 7,
+		encyclopaedia: 8,
+		example: 9,
+		grammar: 10,
+		length: 28
+	};
+
+const dict_ko = [column.pronounce_ko, column.gloss_ko, column.encyclopaedia, column.example]; //for reverse search
+const dict_en = [column.gloss_en];
+
+//reverse search db
+var db_text = [];
+
+for (var i = 0; i < dict.length; i ++) {
+	let t = "";
+
+	for (var j = 0; j < dict_ko.length; j ++) {
+		t += grid(dict, dict_ko[j], i).trim().replaceAll(" ", "") + "|";
+	}
+
+	for (var j = 0; column.grammar + j < column.length; j ++) {
+		t += grid(dict, column.grammar + j, i) + "|";
+	}
+
+	db_text.push(t);
+}
+</script>
+
+</body></html>
