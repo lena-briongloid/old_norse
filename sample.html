@@ -69,13 +69,6 @@
 		</div>
 	</form>
 
-	
-
-	<!--
-		페이지 구조:
-		suggestions - mainpage - propertysettings - NotFound - ADFB - includes - abc
-	-->
-
 	<div class="suggestions" id="suggestions" style="display: none;">
 		<small style="display: inline;">이것을 찾으셨나요?&nbsp;</small>
 		<div id = "suggestions_search" style="display: inline;"> </div>
@@ -170,8 +163,7 @@
 		</nav>
 	</header>
 
-</div> <!--end invelope-->
-</div> <!--end envelope-->
+</div></div>
 
 <div class="footer">
 	<div class="inside">
@@ -184,12 +176,9 @@
 			이메일: <a>lenabriongloid@gmail.com</a>
 		</p>
 		</div>
-		<p style="color:#909090; text-align:right;"><em>Copyright 2024. 유월 All rights reserved.</em></p>
+		<p style="color:#909090; text-align:right;"><em>Copyright 2024. 유월 All rights reserved. Latest revision: 25. 06. 2024.</em></p>
 	</div>
 </div>
-
-
-
 
 <!-- input diacritics with mouse clicks -->
 <script>
@@ -215,7 +204,6 @@
 	});
 </script>
 
-<!-- 임시 생성된 링크 -->
 <script>
 	function link(address) {
 		if (address == Page) { return 0; }
@@ -229,7 +217,6 @@
 	}
 </script>
 
-<!-- ABC 목록 전부 보여주기 -->
 <script>
 	function load_abc(chr, call = false) {
 		show_page(["search_form", "mainpage"], ["suggestions", "not_found", "ADFB", "includes", "abc"]);
@@ -263,7 +250,6 @@
 	}
 </script>
 
-<!-- 앞으로 & 뒤로 가기 -->
 <script>
 	var Undo = []; var Redo = []; var Page = "#main";
 
@@ -275,17 +261,13 @@
 		undo_graphic();
 	}
 
-	//call undo & stack redo
 	function undo_call() {
 		if (Undo.length == 0) { return 0; }
 
-		//stack redo
 		Redo.push(Page);
 
-		//call undo
 		Page = Undo.pop();
 
-		//load
 		load_adfb(Page);
 
 		undo_graphic();
@@ -294,26 +276,21 @@
 	function redo_call() {
 		if (Redo.length == 0) { return 0; }
 
-		//stack undo
 		Undo.push(Page);
 
-		//call redo
 		Page = Redo.pop();
 
-		//load
 		load_adfb(Page);
 
 		undo_graphic();
 	}
 
-	//graphics
 	function undo_graphic() {
 		document.getElementById("topcontrol_left").style.color = Undo.length > 0 ? color.text : color.disabled;
 		document.getElementById("topcontrol_right").style.color = Redo.length > 0 ? color.text : color.disabled;
 	}
 </script>
 
-<!-- 그래픽 -->
 <script>
 	const color = {
 		background: 	"#F1F6EF",
@@ -334,7 +311,6 @@
 	}
 </script>
 
-<!-- 메인 페이지로 -->
 <script>
 	function load_main(call = false) {
 		show_page(["search_form", "mainpage"], ["suggestions", "not_found", "ADFB", "includes", "abc"]);
@@ -351,7 +327,6 @@
 	window.onload = load_main(true);
 </script>
 
-<!-- 부록 -->
 <script>
 	function load_appendix(page, call = false) {
 		show_page(["search_form", "mainpage"], ["suggestions", "not_found", "ADFB", "includes", "abc"]);
@@ -370,7 +345,6 @@
 	}
 </script>
 
-<!-- DB 관리 -->
 <script>
 	function grid(grid, x, y) {
 		if (x < 0 || y < 0 || y >= grid.length || x >= grid[y].length) {
@@ -401,7 +375,6 @@
 	}
 </script>
 
-<!-- SCRIPT OF LANGUAGE -->
 <script>
 	const lang = "non"; //language iso code
 
@@ -420,9 +393,6 @@
 	includeScripts(lang_scr);
 </script>
 
-
-
-<!-- DB Raw Data -->
 <script>
 const csv_00045 = ["allr_a","allr","a","","","알르","모든, 전부의, 완전한<br><small>(비유)</small> 지난, 지나간, 죽은, 사라진, 소멸한","all, entire, whole, full<br><small>(metaph.)</small> past, gone, dead, extinct","","<em>Hón á allan arf eptir mik.</em> <small class=\"IPA\">[혼 아 알란 아르브 에프티르 미크]</small> 내가 죽거든 그녀가 나의 유산을 모두 가지리라.<br><em>Allt er mi mitt megin.</em> <small class=\"IPA\">[알트 에르 미 미트 메긴]</small> 나의 힘이 다 사라졌구나.<br><em>allraheilagradagr</em> <small class=\"IPA\">[알라헤일라그라다그르]</small> 모든 성인 축일, 만성절<br><em>allsherjarlýðr</em> <small class=\"IPA\">[알스헤랴를뤼드르]</small> 모든 사람들. 대중, 평민.<br><em>allvald</em> <small class=\"IPA\">[알왈드]</small> 모든 것을 다스림. 절대권력.","allr<br>알르","öll<br>올","allt<br>알트","alls<br>알스","allrar<br>알라르","alls<br>알스","allir<br>알리르","allar<br>알라르","öll<br>올","allra<br>알라","-<br>-","-<br>-","-<br>-","","","","",""];
 const csv_00070 = ["annarr_a","annarr","a","","","안나르","둘 중 하나의, 다른<br>두 번째의, 잇따르는<br>다른, 또 다른","one of two, the other<br>the second, following<br>another, different","","<em>önnur misseri</em> <small class=\"IPA\">[온누르 미세리]</small> 잇따르는 해.<br><em>annarr mestr maðr</em> <small class=\"IPA\">[안나르 메스트르 마드르]</small> 두 번째로 위대한 사람.<br><em>annarskostar</em> <small class=\"IPA\">[안나르스코스타르]</small> 그렇지 않으면, 그 외에는.<br><em>annarsstaðar</em> <small class=\"IPA\">[안나르스타다르]</small> 다른 곳에서.<br><em>annarsvegar</em> <small class=\"IPA\">[안나르스웨가르]</small> 한편, 반면에.","annarr<br>안나르","önnur<br>온누르","annat<br>안나트","annars<br>안나르스","annarrar<br>안나라르","annars<br>안나르스","aðrir<br>아드리르","aðrar<br>아드라르","önnur<br>온누르","annarra<br>안나라","-<br>-","-<br>-","-<br>-","","","","",""];
@@ -553,10 +523,9 @@ const column = {
 		length: 28
 	};
 
-const dict_ko = [column.pronounce_ko, column.gloss_ko, column.encyclopaedia, column.example]; //for reverse search
+const dict_ko = [column.pronounce_ko, column.gloss_ko, column.encyclopaedia, column.example];
 const dict_en = [column.gloss_en];
 
-//reverse search db
 var db_text = [];
 
 for (var i = 0; i < dict.length; i ++) {
